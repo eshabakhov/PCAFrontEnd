@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: front
+    ports:
+      - '3000:3000'
+    networks:
+      some_network:
+
+networks:
+  some_network:
+    name: 'some_network'
