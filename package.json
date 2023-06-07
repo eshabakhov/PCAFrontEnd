@@ -1,5 +1,5 @@
 {
-  "name": "animal_chipization_ui",
+  "name": "PCA",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080/api",

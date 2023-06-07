@@ -4,6 +4,7 @@ import useStyles from "./style";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Button, Container} from 'reactstrap';
 import {connect} from "react-redux";
+import User from "./entities/users/user";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -13,9 +14,6 @@ function Home(props) {
     const [activeTab, setActiveTab] = useState(tab ? Number(tab) : 0);
 
     useEffect(() => {
-        if (!props.token) {
-            navigate("/login");
-        }
     })
 
     const tabs = [
@@ -51,7 +49,6 @@ function Home(props) {
 function mapStateToProps(state) {
     const {authReducer} = state;
     return {
-        token: authReducer.token,
     }
 }
 

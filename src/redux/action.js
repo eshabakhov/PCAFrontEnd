@@ -10,28 +10,18 @@ export function loadUsers(page = 0, orderBy = null, orderDir = null) {
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
-        const response = await fetch(url, {
-            headers: {
-                'token': store.token,
-            }
-        });
-
-        if (response.status === 401) {
-            window.location.href = '/login';
-            return;
-        }
+        const response = await fetch(url);
 
         const jsonData = await response.json();
         dispatch({
-            type: 'LOAD_ANIMALS',
-            data: jsonData.animals,
-            animalsCount: jsonData.totalCount,
-            animalsPageCount: jsonData.pageCount,
+            type: 'LOAD_USERS',
+            data: jsonData.users,
+            usersCount: jsonData.totalCount,
+            usersPageCount: jsonData.pageCount,
         })
     }
 }
 
-/*
 export function addUser(animal) {
     let arrayAnimalTypes = [];
     arrayAnimalTypes.push(Number(animal.animalTypes))
@@ -117,4 +107,4 @@ export function deleteUser(id) {
             })).catch(() => {
         })
     }
-}*/
+}
