@@ -1,4 +1,5 @@
 import store from "../index.js";
+import {json} from "react-router-dom";
 
 export function loadUsers(page = 0, orderBy = null, orderDir = null) {
     let size = 10
@@ -6,13 +7,14 @@ export function loadUsers(page = 0, orderBy = null, orderDir = null) {
         page--;
     }
     return async dispatch => {
-        let url = `/users/search?from=${page * size}&size=${size}`
+        let url = `/users/list?page=${page * size}&pageSize=${size}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
         const response = await fetch(url);
-
+        console.log(response);
         const jsonData = await response.json();
+        console.log(jsonData);
         dispatch({
             type: 'LOAD_USERS',
             data: jsonData.users,

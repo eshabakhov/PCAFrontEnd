@@ -30,7 +30,7 @@ function User(props) {
         firstRenderRef = false
     }, [])
 
-
+    console.log(props);
     const userList = props.users.map(user => {
         return <tr className={classes.t_row} key={user.id}>
             <td width="12%">{user.id}</td>
