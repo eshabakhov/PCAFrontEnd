@@ -12,14 +12,10 @@ export function loadUsers(page = 0, orderBy = null, orderDir = null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
         const response = await fetch(url);
-        console.log(response);
         const jsonData = await response.json();
-        console.log(jsonData);
         dispatch({
             type: 'LOAD_USERS',
-            data: jsonData.users,
-            usersCount: jsonData.totalCount,
-            usersPageCount: jsonData.pageCount,
+            data: jsonData,
         })
     }
 }

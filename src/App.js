@@ -11,8 +11,6 @@ function App() {
                 <Routes>
                     <Route path='/' exact={true} element={<Home/>}/>
                     <Route path='/:tab' exact={true} element={<Home/>}/>
-                    {/*<Route path='/users/new' exact={true} element={<UserAdd/>}/>*/}
-                    {/*<Route path='/users/:id' element={<UserEdit/>}/>*/}
                 </Routes>
             </Router>
         </div>
@@ -20,7 +18,7 @@ function App() {
 }
 
 function mapStateToProps(state) {
-    const {userReducer, authReducer} = state;
+    const {userReducer} = state;
     return {
         users: userReducer.users,
     }

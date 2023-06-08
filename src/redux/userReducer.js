@@ -5,6 +5,7 @@ let initialState = {
 }
 
 export const userReducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
         case 'LOAD_USER':
             const loadUser = state.users.filter((user) => user.id !== null && user.id > 0)
