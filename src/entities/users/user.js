@@ -33,13 +33,11 @@ function User(props) {
     console.log(props);
     const userList = props.users.map(user => {
         return <tr className={classes.t_row} key={user.id}>
-            <td width="12%">{user.id}</td>
-            <td width="12%">{user.login}</td>
-            <td width="12%">{user.passwordHash}</td>
-            <td width="12%">{user.name}</td>
-            <td width="12%">{user.surname}</td>
-            <td width="12%">{user.patronymic}</td>
-            <td width="12%">{user.isAdmin}</td>
+            <td width="16%">{user.login}</td>
+            <td width="16%">{user.name}</td>
+            <td width="16%">{user.surname}</td>
+            <td width="16%">{user.patronymic}</td>
+            <td width="16%">{user.isAdmin}</td>
             <td width="16%">
                 <ButtonGroup>
                     <Button className={classes.button_com} onClick={() =>
@@ -53,20 +51,14 @@ function User(props) {
     return (
         <div>
             <Container>
-                <div>
-                    <Button align="right" className={classes.button_com} onClick={() =>
-                        navigate("/users/new")}>Добавить пользователя</Button>
-                </div>
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th onClick={(event) => props.ls(event)} id="id" width="12">ID</th>
-                        <th name="login" width="12%">Логин</th>
-                        <th onClick={(event) => props.ls(event)} id="passwordHash" width="12%">Хэш пароля</th>
-                        <th onClick={(event) => props.ls(event)} id="name" width="12%">Имя</th>
-                        <th onClick={(event) => props.ls(event)} id="surname" width="12%">Фамилия</th>
-                        <th onClick={(event) => props.ls(event)} id="patronymic" width="12%">Отчество</th>
-                        <th onClick={(event) => props.ls(event)} id="isAdmin" width="12%">Админ</th>
+                        <th name="login" width="16%">Логин</th>
+                        <th onClick={(event) => props.ls(event)} id="name" width="16%">Имя</th>
+                        <th onClick={(event) => props.ls(event)} id="surname" width="16%">Фамилия</th>
+                        <th onClick={(event) => props.ls(event)} id="patronymic" width="16%">Отчество</th>
+                        <th onClick={(event) => props.ls(event)} id="isAdmin" width="16%">Роль</th>
                         <th name="operations" width="16%"> Операции</th>
                     </tr>
                     </thead>
@@ -79,13 +71,28 @@ function User(props) {
                     </Table>
                 </div>
             </Container>
-            <Pagination className={classes.mt}
-                        count={props.usersPageCount} shape="rounded"
-                        onChange={(event, page) => props.ls(event, page)}
-                        page={currentPage}
-                        defaultPage={currentPage}
-
-            />
+            <Container>
+                <Table className={classes.table}>
+                    <tbody>
+                        <tr>
+                            <td width="12%">
+                                <Button align="left" className={classes.button_com} onClick={() => navigate("/users/new")}>
+                                    Добавить пользователя
+                                </Button>
+                            </td>
+                            <td width="78%"/>
+                            <td width="10%">
+                                <Pagination align="right" className={classes.mt}
+                                            count={props.usersPageCount} shape="rounded"
+                                            onChange={(event, page) => props.ls(event, page)}
+                                            page={currentPage}
+                                            defaultPage={currentPage}
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Container>
         </div>
     );
 }

@@ -20,87 +20,52 @@ export function loadUsers(page = 0, orderBy = null, orderDir = null) {
     }
 }
 
-export function addUser(animal) {
-    let arrayAnimalTypes = [];
-    arrayAnimalTypes.push(Number(animal.animalTypes))
-    animal.animalTypes = arrayAnimalTypes
-    animal.weight = Number(animal.weight)
-    animal.length = Number(animal.length)
-    animal.height = Number(animal.height)
-    animal.chipperId = Number(animal.chipperId)
-    animal.chippingLocationId = Number(animal.chippingLocationId)
+export function addUser(user) {
     return async dispatch => {
         fetch('/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': store.token
             },
-            body: JSON.stringify(animal)
-        }).then(async response => {
-            if (response.status === 401) {
-                window.location.href = '/login';
-                throw new Error('error');
-            }
-        })
-            .then(res => res.json())
-            .then(animal =>
+            body: JSON.stringify(user)
+        }).then(async response => response.json())
+            .then(user =>
                 dispatch({
                     type: 'ADD_USER',
-                    animal
+                    user
                 })).catch(() => {
         })
     }
 }
 
-export function editUser(animal) {
-    let arrayAnimalTypes = [];
-    arrayAnimalTypes.push(Number(animal.animalTypes))
-    animal.animalTypes = arrayAnimalTypes
-    animal.weight = Number(animal.weight)
-    animal.length = Number(animal.length)
-    animal.height = Number(animal.height)
-    animal.chipperId = Number(animal.chipperId)
-    animal.chippingLocationId = Number(animal.chippingLocationId)
+export function editUser(user) {
+    console.log(user)
     return async dispatch => {
-        const response = await fetch(`/animals/${animal.id}`, {
+        const response = await fetch(`/users`, {
             method: 'PUT',
             headers: {
-                'Accetp': 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': store.token
             },
-            body: JSON.stringify(animal)
+            body: JSON.stringify(user)
         })
-        if (response.status === 401) {
-            window.location.href = '/login';
-            return
-        }
-
         const jsonData = await response.json();
         dispatch({
-            type: 'EDIT_ANIMAL',
-            animal: jsonData
+            type: 'EDIT_USER',
+            user: jsonData
         })
     }
 }
 
 export function deleteUser(id) {
     return async dispatch => {
-        fetch(`/animals/${id}`, {
+        fetch(`/users/${id}`, {
             method: 'DELETE',
-            headers: {
-                'token': store.token
-            }
-        }).then(async response => {
-            if (response.status === 401) {
-                window.location.href = '/login';
-                throw new Error('error');
-            }
-        }).then(() =>
+        }).then(async response => response.json())
+            .then(() =>
             dispatch({
-                type: 'DELETE_ANIMAL',
+                type: 'DELETE_USER',
                 id
             })).catch(() => {
         })

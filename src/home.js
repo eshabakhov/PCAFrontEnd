@@ -35,7 +35,7 @@ function Home(props) {
         <Container className={classes.cont}>
             <div className={classes.bottomborder}>
                 {tabs.map((tab, i) => (
-                    <Button id={i} onClick={openTab}
+                    <Button key={i} id={i} onClick={openTab}
                             className={i === activeTab ? classes.tab_active : classes.tab_nonactive}>
                         {tab.title}
                     </Button>

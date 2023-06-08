@@ -11,16 +11,8 @@ export const change = (event, setFunction, entity) => {
 }
 
 export const getEntity = (entity, id, setFunction) => {
-    return fetch(`${id}`, {
-        headers: {
-            'token': store.token
-        }
-    })
+    return fetch(`${id}`)
         .then(async response => {
-            if (response.status === 401) {
-                window.location.href = '/login';
-                return
-            }
             let jsonData = await response.json()
             setFunction(jsonData)
         });
