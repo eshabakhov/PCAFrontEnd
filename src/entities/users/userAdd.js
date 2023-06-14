@@ -10,6 +10,7 @@ import {Checkbox, FormControlLabel} from "@mui/material";
 function UserAdd(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const label = { inputProps: { 'aria-label': 'Администратор' } };
 
     const emptyUser = {
         login: '',
@@ -75,10 +76,14 @@ function UserAdd(props) {
                            onChange={handleChange} autoComplete="checkPassword" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="isAdmin">Администратор</Label><br/>
-                    <Input className={classes.input} type="checkbox" onChange={handleChangeCheckBox}
-                           checked={checked}
-                           value={user.isAdmin} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
+                    <FormControlLabel
+                        control=
+                        {
+                            <Checkbox className={classes.input} type="checkbox" onChange={handleChangeCheckBox}
+                            value={user.isAdmin} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
+                        }
+                        label="Администратор"
+                   />
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
