@@ -80,7 +80,7 @@ function User(props) {
                                     Добавить пользователя
                                 </Button>
                             </td>
-                            <td width="78%"/>
+                            <td width="78%"/> {/* убрать эту штуку*/}
                             <td width="10%">
                                 <Pagination align="right" className={classes.mt}
                                             count={props.usersPageCount} shape="rounded"

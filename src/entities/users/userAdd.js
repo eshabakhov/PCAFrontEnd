@@ -17,7 +17,7 @@ function UserAdd(props) {
         name: '',
         surname: '',
         patronymic: '',
-        isAdmin: '',
+        isAdmin: false,
     };
     const [user, setUser] = useState(emptyUser)
 
@@ -27,7 +27,7 @@ function UserAdd(props) {
     const handleChange = event => {
         change(event, setUser, user)
     }
-
+    console.log(user)
     const title = <h2>{'Добавить пользователя'}</h2>;
     return <div className={classes.modal}>
         <Container align="center">
@@ -67,7 +67,9 @@ function UserAdd(props) {
                            onChange={handleChange} autoComplete="checkPassword" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormControlLabel required control={<Checkbox value={user.isAdmin}/>} label="Администратор" />
+                    <Label className={classes.label} for="isAdmin">Администратор</Label><br/>
+                    <Input className={classes.input} type="checkbox" onChange={handleChange}
+                           value={user.isAdmin ? "false" : "true"} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
