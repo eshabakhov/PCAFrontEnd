@@ -71,3 +71,75 @@ export function deleteUser(id) {
         })
     }
 }
+
+
+export function loadCalls(page = 0, orderBy = null, orderDir = null) {
+    let size = 10
+    if (page > 0) {
+        page--;
+    }
+    return async dispatch => {
+        let url = `/calls/list?page=${page * size}&pageSize=${size}`
+        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
+            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
+        }
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        dispatch({
+            type: 'LOAD_CALLS',
+            data: jsonData,
+        })
+    }
+}
+
+export function addCall(user) {
+    return async dispatch => {
+        fetch('/calls', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        }).then(async response => response.json())
+            .then(user =>
+                dispatch({
+                    type: 'ADD_CALL',
+                    user
+                })).catch(() => {
+        })
+    }
+}
+
+export function editCall(user) {
+    console.log(user)
+    return async dispatch => {
+        const response = await fetch(`/calls`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        const jsonData = await response.json();
+        dispatch({
+            type: 'EDIT_CALL',
+            user: jsonData
+        })
+    }
+}
+
+export function deleteCall(id) {
+    return async dispatch => {
+        fetch(`/calls/${id}`, {
+            method: 'DELETE',
+        }).then(async response => response.json())
+            .then(() =>
+                dispatch({
+                    type: 'DELETE_CALL',
+                    id
+                })).catch(() => {
+        })
+    }
+}

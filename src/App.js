@@ -22,9 +22,10 @@ function App() {
 }
 
 function mapStateToProps(state) {
-    const {userReducer} = state;
+    const {userReducer, callReducer} = state;
     return {
         users: userReducer.users,
+        calls: callReducer.calls,
     }
 }
 

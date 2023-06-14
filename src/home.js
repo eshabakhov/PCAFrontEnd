@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Button, Container} from 'reactstrap';
 import {connect} from "react-redux";
 import User from "./entities/users/user";
+import Call from "./entities/calls/call";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Home(props) {
 
     const tabs = [
         {title: 'Пользователи', component: <User/>},
+        {title: 'Переговоры', component: <Call/>}
     ];
     // Смена вкладки
     const openTab = event => {
