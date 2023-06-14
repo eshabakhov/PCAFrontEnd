@@ -34,8 +34,8 @@ function AbonentAdd(props) {
                 navigate("/?tab=" + 0)
             }}>
                 <FormGroup>
-                    <Label className={classes.label} for="login">Номер телефона</Label><br/>
-                    <Input className={classes.input} type="text" name="phonenumber" id="phonenumber" value={abonent.phoneNumber || ''}
+                    <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
+                    <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber" value={abonent.phoneNumber || ''}
                            onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>

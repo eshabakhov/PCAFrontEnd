@@ -5,7 +5,6 @@ import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
 import {editAbonent} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {Checkbox, FormControlLabel} from "@mui/material";
 
 function AbonentEdit(props) {
     const dispatch = useDispatch();
@@ -41,7 +40,7 @@ function AbonentEdit(props) {
                 <FormGroup>
                     <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
                     <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber" value={abonent.phoneNumber || ''}
-                           onChange={handleChange} autoComplete="phonenumber" required/>
+                           onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="inn">Инн</Label><br/>
