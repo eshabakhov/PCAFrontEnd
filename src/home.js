@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import User from "./entities/users/user";
 import Abonent from "./entities/abonents/abonent";
 import Call from "./entities/calls/call";
+import City from "./entities/city/city";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ function Home(props) {
         {title: 'Пользователи', component: <User/>},
         {title: 'Переговоры', component: <Call/>},
         {title: 'Абоненты', component: <Abonent/>},
+        {title: 'Города', component: <City/>},
     ];
     // Смена вкладки
     const openTab = event => {

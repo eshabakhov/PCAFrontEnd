@@ -8,6 +8,8 @@ import AbonentAdd from "./entities/abonents/abonentAdd";
 import AbonentEdit from "./entities/abonents/abonentEdit";
 import CallAdd from "./entities/calls/callAdd";
 import CallEdit from "./entities/calls/callEdit";
+import CityEdit from "./entities/city/cityEdit";
+import CityAdd from "./entities/city/cityAdd";
 
 function App() {
     document.title = 'Учет телефонных звонков'
@@ -23,6 +25,8 @@ function App() {
                     <Route path='/abonents/:id' exact={true} element={<AbonentEdit/>}/>
                     <Route path='/calls' exact={true} element={<CallAdd/>}/>
                     <Route path='/calls/:id' exact={true} element={<CallEdit/>}/>
+                    <Route path='/cities/' exact={true} element={<CityEdit/>}/>
+                    <Route path='/cities/:id' exact={true} element={<CityAdd/>}/>
                 </Routes>
             </Router>
         </div>
@@ -30,11 +34,12 @@ function App() {
 }
 
 function mapStateToProps(state) {
-    const {userReducer, callReducer, abonentReducer} = state;
+    const {userReducer, callReducer, abonentReducer, cityReducer} = state;
     return {
         users: userReducer.users,
         calls: callReducer.calls,
-        abonents: abonentReducer.abonents
+        abonents: abonentReducer.abonents,
+        cities: cityReducer.cities
     }
 }
 
