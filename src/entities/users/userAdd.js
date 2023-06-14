@@ -10,6 +10,7 @@ import {Checkbox, FormControlLabel} from "@mui/material";
 function UserAdd(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const label = { inputProps: { 'aria-label': 'Администратор' } };
 
     const emptyUser = {
         login: '',
@@ -17,17 +18,25 @@ function UserAdd(props) {
         name: '',
         surname: '',
         patronymic: '',
-        isAdmin: '',
+        isAdmin: false,
     };
     const [user, setUser] = useState(emptyUser)
+    const [checked, setChecked] = useState(true)
 
     const classes = useStyles();
     useEffect(() => {
     }, []);
     const handleChange = event => {
         change(event, setUser, user)
+        console.log(event)
+    }
+    const handleChangeCheckBox = event => {
+        console.log(event.target.checked)
+        setChecked(event.target.checked)
+        user.isAdmin=event.target.checked
     }
 
+    console.log(user)
     const title = <h2>{'Добавить пользователя'}</h2>;
     return <div className={classes.modal}>
         <Container align="center">
@@ -67,7 +76,14 @@ function UserAdd(props) {
                            onChange={handleChange} autoComplete="checkPassword" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormControlLabel required control={<Checkbox value={user.isAdmin}/>} label="Администратор" />
+                    <FormControlLabel
+                        control=
+                        {
+                            <Checkbox className={classes.input} type="checkbox" onChange={handleChangeCheckBox}
+                            value={user.isAdmin} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
+                        }
+                        label="Администратор"
+                   />
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}

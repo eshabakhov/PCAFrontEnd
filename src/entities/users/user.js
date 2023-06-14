@@ -37,7 +37,7 @@ function User(props) {
             <td width="16%">{user.name}</td>
             <td width="16%">{user.surname}</td>
             <td width="16%">{user.patronymic}</td>
-            <td width="16%">{user.isAdmin}</td>
+            <td width="16%">{user.isAdmin || ""}</td>
             <td width="16%">
                 <ButtonGroup>
                     <Button className={classes.button_com} onClick={() =>
@@ -59,7 +59,7 @@ function User(props) {
                         <th onClick={(event) => props.ls(event)} id="surname" width="16%">Фамилия</th>
                         <th onClick={(event) => props.ls(event)} id="patronymic" width="16%">Отчество</th>
                         <th onClick={(event) => props.ls(event)} id="isAdmin" width="16%">Роль</th>
-                        <th name="operations" width="16%"> Операции</th>
+                        <th name="operations" width="16%">Операции</th>
                     </tr>
                     </thead>
                 </Table>
@@ -80,7 +80,7 @@ function User(props) {
                                     Добавить пользователя
                                 </Button>
                             </td>
-                            <td width="78%"/>
+                            <td width="78%"/>{/* убрать эту штуку*/}
                             <td width="10%">
                                 <Pagination align="right" className={classes.mt}
                                             count={props.usersPageCount} shape="rounded"
