@@ -20,13 +20,21 @@ function UserAdd(props) {
         isAdmin: false,
     };
     const [user, setUser] = useState(emptyUser)
+    const [checked, setChecked] = useState(true)
 
     const classes = useStyles();
     useEffect(() => {
     }, []);
     const handleChange = event => {
         change(event, setUser, user)
+        console.log(event)
     }
+    const handleChangeCheckBox = event => {
+        console.log(event.target.checked)
+        setChecked(event.target.checked)
+        user.isAdmin=event.target.checked
+    }
+
     console.log(user)
     const title = <h2>{'Добавить пользователя'}</h2>;
     return <div className={classes.modal}>
@@ -68,8 +76,9 @@ function UserAdd(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="isAdmin">Администратор</Label><br/>
-                    <Input className={classes.input} type="checkbox" onChange={handleChange}
-                           value={user.isAdmin ? "false" : "true"} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
+                    <Input className={classes.input} type="checkbox" onChange={handleChangeCheckBox}
+                           checked={checked}
+                           value={user.isAdmin} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
