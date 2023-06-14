@@ -5,6 +5,6 @@ import {abonentReducer} from './abonentReducer';
 
 export const rootReducer = combineReducers({
     userReducer: userReducer,
-    abonentReducer: abonentReducer
+    abonentReducer: abonentReducer,
     callReducer: callReducer
 });

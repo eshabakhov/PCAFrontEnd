@@ -20,7 +20,7 @@ function Home(props) {
 
     const tabs = [
         {title: 'Пользователи', component: <User/>},
-        {title: 'Переговоры', component: <Call/>}
+        {title: 'Переговоры', component: <Call/>},
         {title: 'Абоненты', component: <Abonent/>},
     ];
     // Смена вкладки
