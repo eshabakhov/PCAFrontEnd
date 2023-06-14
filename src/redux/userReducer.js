@@ -16,6 +16,11 @@ export const userReducer = (state = initialState, action) => {
             }
         case 'LOAD_USERS':
             let loadUsers = action.data.map(res => {
+                if (res.isAdmin) {
+                    res.isAdmin = "Администратор"
+                } else {
+                    res.isAdmin = "Пользователь"
+                }
                 return {
                     id: res.id,
                     login: res.login,
@@ -23,7 +28,7 @@ export const userReducer = (state = initialState, action) => {
                     name: res.name,
                     surname: res.surname,
                     patronymic: res.patronymic,
-                    isAdmin: (res.isAdmin || "").toString(),
+                    isAdmin: res.isAdmin,
                 }
             })
 
