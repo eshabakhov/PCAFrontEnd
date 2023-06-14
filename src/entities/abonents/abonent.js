@@ -77,7 +77,7 @@ function Abonent(props) {
                                 Добавить пользователя
                             </Button>
                         </td>
-                        <td width="78%"/> {/* убрать эту штуку*/}
+                        <td width="78%"/>{/* убрать эту штуку*/}
                         <td width="10%">
                             <Pagination align="right" className={classes.mt}
                                         count={props.abonentsPageCount} shape="rounded"
