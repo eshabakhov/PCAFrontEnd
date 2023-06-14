@@ -27,7 +27,7 @@ function CallAdd(props) {
         change(event, setCall, call)
     }
     console.log(call)
-    const title = <h2>{'Добавить переговор'}</h2>;
+    const title = <h2>{'Добавить город'}</h2>;
     return <div className={classes.modal}>
         <Container align="center">
             {title}

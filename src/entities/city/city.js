@@ -79,7 +79,7 @@ function City(props) {
                     <tr>
                         <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/cities/new")}>
-                                Добавить Переговор
+                                Добавить город
                             </Button>
                         </td>
                         <td width="78%"/>
