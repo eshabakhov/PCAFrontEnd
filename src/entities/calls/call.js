@@ -79,7 +79,7 @@ function Call(props) {
                     <tr>
                         <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/calls/new")}>
-                                Добавить Переговор
+                                Добавить переговор
                             </Button>
                         </td>
                         <td width="78%"/>

@@ -74,7 +74,7 @@ function Abonent(props) {
                     <tr>
                         <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/abonents/new")}>
-                                Добавить пользователя
+                                Добавить абонента
                             </Button>
                         </td>
                         <td width="78%"/>{/* убрать эту штуку*/}
