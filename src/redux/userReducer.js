@@ -23,7 +23,7 @@ export const userReducer = (state = initialState, action) => {
                     name: res.name,
                     surname: res.surname,
                     patronymic: res.patronymic,
-                    isAdmin: res.isAdmin,
+                    isAdmin: (res.isAdmin || "").toString(),
                 }
             })
 

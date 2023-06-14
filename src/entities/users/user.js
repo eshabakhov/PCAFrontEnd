@@ -37,7 +37,7 @@ function User(props) {
             <td width="16%">{user.name}</td>
             <td width="16%">{user.surname}</td>
             <td width="16%">{user.patronymic}</td>
-            <td width="16%">{user.isAdmin}</td>
+            <td width="16%">{user.isAdmin || ""}</td>
             <td width="16%">
                 <ButtonGroup>
                     <Button className={classes.button_com} onClick={() =>
