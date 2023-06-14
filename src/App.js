@@ -6,6 +6,8 @@ import UserAdd from "./entities/users/userAdd";
 import UserEdit from "./entities/users/userEdit";
 import AbonentAdd from "./entities/abonents/abonentAdd";
 import AbonentEdit from "./entities/abonents/abonentEdit";
+import CallAdd from "./entities/calls/callAdd";
+import CallEdit from "./entities/calls/callEdit";
 
 function App() {
     document.title = 'Учет телефонных звонков'
@@ -19,6 +21,8 @@ function App() {
                     <Route path='/users/:id' exact={true} element={<UserEdit/>}/>
                     <Route path='/abonents/new' exact={true} element={<AbonentAdd/>}/>
                     <Route path='/abonents/:id' exact={true} element={<AbonentEdit/>}/>
+                    <Route path='/calls' exact={true} element={<CallAdd/>}/>
+                    <Route path='/calls/:id' exact={true} element={<CallEdit/>}/>
                 </Routes>
             </Router>
         </div>
@@ -26,10 +30,11 @@ function App() {
 }
 
 function mapStateToProps(state) {
-    const {userReducer, callReducer} = state;
+    const {userReducer, callReducer, abonentReducer} = state;
     return {
         users: userReducer.users,
         calls: callReducer.calls,
+        abonents: abonentReducer.abonents
     }
 }
 
