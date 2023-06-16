@@ -1,7 +1,8 @@
 let initialState = {
     cities: [],
-    citiesCount: 0,
-    citiesPageCount: 0,
+    currentPage: 0,
+    pageSize: 0,
+    total: 0,
 }
 
 export const cityReducer = (state = initialState, action) => {
@@ -15,7 +16,7 @@ export const cityReducer = (state = initialState, action) => {
                 cities: loadCall
             }
         case 'LOAD_CITIES':
-            let loadCities = action.data.map(res => {
+            let loadCities = action.data.list.map(res => {
                 return {
                     id: res.id,
                     nightRate: res.nightRate,
@@ -29,8 +30,9 @@ export const cityReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cities: loadCities,
-                citiesCount: action.citiesCount,
-                citiesPageCount: action.citiesPageCount
+                currentPage: action.data.currentPage,
+                pageSize: action.data.pageSize,
+                total: action.data.total,
             }
         case 'ADD_CITY':
             const addCall = state.cities.filter((city) => city.id !== action.city.id)

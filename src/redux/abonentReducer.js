@@ -1,7 +1,8 @@
 let initialState = {
     abonents: [],
-    abonentsCount: 0,
-    abonentsPageCount: 0,
+    currentPage: 0,
+    pageSize: 0,
+    total: 0,
 }
 
 export const abonentReducer = (state = initialState, action) => {
@@ -15,7 +16,7 @@ export const abonentReducer = (state = initialState, action) => {
                 abonents: loadAbonent
             }
         case 'LOAD_ABONENTS':
-            let loadAbonents = action.data.map(res => {
+            let loadAbonents = action.data.list.map(res => {
                 return {
                     id: res.id,
                     phoneNumber: res.phoneNumber,
@@ -28,8 +29,9 @@ export const abonentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 abonents: loadAbonents,
-                abonentsCount: action.abonentsCount,
-                abonentsPageCount: action.abonentsPageCount
+                currentPage: action.data.currentPage,
+                pageSize: action.data.pageSize,
+                total: action.data.total,
             }
         case 'ADD_ABONENT':
             const addAbonent = state.abonents.filter((abonent) => abonent.id !== action.abonent.id)
