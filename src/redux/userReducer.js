@@ -1,7 +1,8 @@
 let initialState = {
     users: [],
-    usersCount: 0,
-    usersPageCount: 0,
+    currentPage: 0,
+    pageSize: 0,
+    total: 0,
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -15,7 +16,7 @@ export const userReducer = (state = initialState, action) => {
                 users: loadUser
             }
         case 'LOAD_USERS':
-            let loadUsers = action.data.map(res => {
+            let loadUsers = action.data.list.map(res => {
                 if (res.isAdmin) {
                     res.isAdmin = "Администратор"
                 } else {
@@ -34,8 +35,9 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: loadUsers,
-                usersCount: action.usersCount,
-                usersPageCount: action.usersPageCount
+                currentPage: action.data.currentPage,
+                pageSize: action.data.pageSize,
+                total: action.data.total,
             }
         case 'ADD_USER':
             const addUser = state.users.filter((user) => user.id !== action.user.id)

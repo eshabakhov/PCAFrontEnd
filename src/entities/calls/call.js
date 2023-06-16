@@ -82,10 +82,10 @@ function Call(props) {
                                 Добавить переговор
                             </Button>
                         </td>
-                        <td width="78%"/>
-                        <td width="10%">
+                        <td width="70%"/>
+                        <td width="18%">
                             <Pagination align="right" className={classes.mt}
-                                        count={props.callsPageCount} shape="rounded"
+                                        count={Math.ceil(props.total / props.pageSize)} shape="rounded"
                                         onChange={(event, page) => props.ls(event, page)}
                                         page={currentPage}
                                         defaultPage={currentPage}
@@ -103,8 +103,9 @@ function mapStateToProps(state) {
     const {callReducer} = state;
     return {
         calls: callReducer.calls,
-        callsCount: callReducer.callsCount,
-        callsPageCount: callReducer.callsPageCount,
+        currentPage: callReducer.currentPage,
+        pageSize: callReducer.pageSize,
+        total: callReducer.total
     }
 }
 
