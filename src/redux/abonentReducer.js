@@ -18,8 +18,9 @@ export const abonentReducer = (state = initialState, action) => {
         case 'LOAD_ABONENTS':
             let loadAbonents = action.data.list.map(res => {
                 return {
-                    inn: res.inn,
+                    id: res.id,
                     phoneNumber: res.phoneNumber,
+                    inn: res.inn,
                     address: res.address,
                     name: res.name,
                 }

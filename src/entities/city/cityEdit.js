@@ -45,7 +45,7 @@ function CityEdit(props) {
                     <Label className={classes.label} for="name">Название города</Label><br/>
                     <Input className={classes.input} type="text" name="name" id="name"
                            value={city.name || ''}
-                           onChange={handleChange} autoComplete="phoneNumber" required/>
+                           onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="nightRate">Тариф ночной</Label><br/>
