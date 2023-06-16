@@ -1,3 +1,5 @@
+let pageSize = 10
+
 export function loadUsers(page = 0, orderBy = null, orderDir = null) {
     let size = 10
     if (page > 0) {
@@ -282,6 +284,21 @@ export function deleteCity(id) {
                     type: 'DELETE_CITY',
                     id
                 })).catch(() => {
+        })
+    }
+}
+
+export function loadAudits(page = 1, orderBy = null, orderDir = null) {
+    return async dispatch => {
+        let url = `/audit/list?page=${page}&pageSize=${pageSize}`
+        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
+            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
+        }
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        dispatch({
+            type: 'LOAD_AUDITS',
+            data: jsonData,
         })
     }
 }
