@@ -8,6 +8,7 @@ import User from "./entities/users/user";
 import Abonent from "./entities/abonents/abonent";
 import Call from "./entities/calls/call";
 import City from "./entities/city/city";
+import Audit from "./entities/audit/audit";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Home(props) {
         {title: 'Переговоры', component: <Call/>},
         {title: 'Абоненты', component: <Abonent/>},
         {title: 'Города', component: <City/>},
+        {title: 'Аудит', component: <Audit/>},
     ];
     // Смена вкладки
     const openTab = event => {

@@ -285,3 +285,22 @@ export function deleteCity(id) {
         })
     }
 }
+
+export function loadAudits(page = 0, orderBy = null, orderDir = null) {
+    let size = 10
+    if (page > 0) {
+        page--;
+    }
+    return async dispatch => {
+        let url = `/audit/list?page=${page * size}&pageSize=${size}`
+        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
+            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
+        }
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        dispatch({
+            type: 'LOAD_AUDITS',
+            data: jsonData,
+        })
+    }
+}
