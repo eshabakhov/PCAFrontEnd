@@ -17,6 +17,7 @@ function AbonentEdit(props) {
         phoneNumber: '',
         inn: '',
         address: '',
+        name: '',
     };
     const [abonent, setAbonent] = useState(emptyAbonent)
     const classes = useStyles();
@@ -51,6 +52,11 @@ function AbonentEdit(props) {
                     <Label className={classes.label} for="address">Адрес</Label><br/>
                     <Input className={classes.input} type="text" name="address" id="address" value={abonent.address || ''}
                            onChange={handleChange} autoComplete="address" required/>
+                </FormGroup>
+                <FormGroup>
+                    <Label className={classes.label} for="name">Имя</Label><br/>
+                    <Input className={classes.input} type="text" name="name" id="name" value={abonent.name || ''}
+                           onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}

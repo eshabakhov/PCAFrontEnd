@@ -4,7 +4,6 @@ let initialState = {
     abonentsPageCount: 0,
 }
 
-
 export const abonentReducer = (state = initialState, action) => {
     console.log(action);
     switch (action.type) {
@@ -13,15 +12,15 @@ export const abonentReducer = (state = initialState, action) => {
             loadAbonent.push(action.abonents)
             return {
                 ...state,
-                users: loadAbonent
+                abonents: loadAbonent
             }
         case 'LOAD_ABONENTS':
             let loadAbonents = action.data.map(res => {
                 return {
-                    id: res.id,
-                    phoneNumber: res.phoneNumber,
                     inn: res.inn,
+                    phoneNumber: res.phoneNumber,
                     address: res.address,
+                    name: res.name,
                 }
             })
 

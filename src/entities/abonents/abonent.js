@@ -26,16 +26,18 @@ function Abonent(props) {
         if (!firstRenderRef) {
             return
         }
-        //dispatch(loadAbonents())
+        dispatch(loadAbonents())
         firstRenderRef = false
     }, [])
 
     console.log(props);
     const abonentList = props.abonents.map(abonent => {
         return <tr className={classes.t_row} key={abonent.id}>
+            <td width="5%">{abonent.id}</td>
             <td width="16%">{abonent.phoneNumber}</td>
             <td width="16%">{abonent.inn}</td>
             <td width="16%">{abonent.address}</td>
+            <td width="16%">{abonent.name}</td>
             <td width="16%">
                 <ButtonGroup>
                     <Button className={classes.button_com} onClick={() =>
@@ -52,11 +54,12 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th name="login" width="16%">Логин</th>
+                        <th onClick={(event) => props.ls(event)} id="abonentId" width="5%">ID</th>
                         <th onClick={(event) => props.ls(event)} id="phoneNumber" width="16%">Номер телефона</th>
                         <th onClick={(event) => props.ls(event)} id="inn" width="16%">ИНН</th>
                         <th onClick={(event) => props.ls(event)} id="address" width="16%">Адрес</th>
-                        <th name="operations" width="16%"> Операции</th>
+                        <th onClick={(event) => props.ls(event)} id="name" width="16%">Имя</th>
+                        <th name="operations" width="16%"></th>
                     </tr>
                     </thead>
                 </Table>
@@ -74,10 +77,10 @@ function Abonent(props) {
                     <tr>
                         <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/abonents/new")}>
-                                Добавить абонента
+                                Добавить переговор
                             </Button>
                         </td>
-                        <td width="78%"/>{/* убрать эту штуку*/}
+                        <td width="78%"/>
                         <td width="10%">
                             <Pagination align="right" className={classes.mt}
                                         count={props.abonentsPageCount} shape="rounded"
