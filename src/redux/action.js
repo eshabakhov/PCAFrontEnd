@@ -125,7 +125,7 @@ export function editAbonent(abonent) {
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_ABONENT',
-            user: jsonData
+            abonent: jsonData
         })
     }
 }
@@ -236,7 +236,7 @@ export function loadCities(page = 0, orderBy = null, orderDir = null) {
     }
 }
 
-export function addCity(user) {
+export function addCity(city) {
     return async dispatch => {
         fetch('/cities', {
             method: 'POST',
@@ -244,19 +244,19 @@ export function addCity(user) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(city)
         }).then(async response => response.json())
-            .then(user =>
+            .then(city =>
                 dispatch({
                     type: 'ADD_CITY',
-                    user
+                    city
                 })).catch(() => {
         })
     }
 }
 
-export function editCity(user) {
-    console.log(user)
+export function editCity(city) {
+    console.log(city)
     return async dispatch => {
         const response = await fetch(`/cities`, {
             method: 'PUT',
@@ -264,12 +264,12 @@ export function editCity(user) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(city)
         })
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_CITY',
-            user: jsonData
+            city: jsonData
         })
     }
 }
