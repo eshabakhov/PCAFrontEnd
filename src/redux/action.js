@@ -72,13 +72,9 @@ export function deleteUser(id) {
 }
 
 
-export function loadAbonents(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadAbonents(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/abonents/list?page=${page * size}&pageSize=${size}`
+        let url = `/abonents/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
