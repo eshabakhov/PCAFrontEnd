@@ -8,8 +8,6 @@ import {deleteAbonent, loadAbonents} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
 
 let currentPage = 1;
-let orderDir = "desc";
-let orderBy = "";
 let firstRenderRef = true
 
 function Abonent(props) {
@@ -54,11 +52,11 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th onClick={(event) => props.ls(event)} id="id" width="5%">ID</th>}
-                        <th onClick={(event) => props.ls(event)} id="phoneNumber" width="16%">Номер телефона</th>
-                        <th onClick={(event) => props.ls(event)} id="inn" width="16%">ИНН</th>
-                        <th onClick={(event) => props.ls(event)} id="address" width="16%">Адрес</th>
-                        <th onClick={(event) => props.ls(event)} id="name" width="16%">Имя</th>
+                        <th id="id" width="5%">ID</th>
+                        <th id="phoneNumber" width="16%">Номер телефона</th>
+                        <th id="inn" width="16%">ИНН</th>
+                        <th id="address" width="16%">Адрес</th>
+                        <th id="name" width="16%">Имя</th>
                         <th name="operations" width="16%"></th>
                     </tr>
                     </thead>
@@ -76,7 +74,8 @@ function Abonent(props) {
                     <tbody>
                     <tr>
                         <td width="12%">
-                            <Button align="left" className={classes.button_com} onClick={() => navigate("/abonents/new")}>
+                            <Button align="left" className={classes.button_com}
+                                    onClick={() => navigate("/abonents/new")}>
                                 Добавить абонента
                             </Button>
                         </td>
@@ -112,24 +111,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteAbonent: (id) => {
             dispatch(deleteAbonent(id))
-            dispatch(loadAbonents(1, orderBy, orderDir))
+            dispatch(loadAbonents(1))
         },
         ls: (event, page = 1) => {
             currentPage = page;
-            if (event.target.id !== "") {
-                if (event.target.id !== orderBy) {
-                    orderBy = event.target.id;
-                    orderDir = 'asc';
-                }
-                if (orderBy !== "") {
-                    if (orderDir === 'desc') {
-                        orderDir = 'asc'
-                    } else {
-                        orderDir = 'desc'
-                    }
-                }
-            }
-            dispatch(loadAbonents(page, orderBy, orderDir))
+            dispatch(loadAbonents(page))
         },
     }
 }

@@ -8,8 +8,6 @@ import {deleteCall, loadCalls} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
 
 let currentPage = 1;
-let orderDir = "desc";
-let orderBy = "";
 let firstRenderRef = true
 
 function Call(props) {
@@ -55,12 +53,12 @@ function Call(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th onClick={(event) => props.ls(event)} id="calId" width="5%">ID</th>
-                        <th onClick={(event) => props.ls(event)} id="abonentName" width="16%">Имя абонента</th>
-                        <th onClick={(event) => props.ls(event)} id="cityName" width="16%">Название города</th>
-                        <th onClick={(event) => props.ls(event)} id="date" width="16%">Дата</th>
-                        <th onClick={(event) => props.ls(event)} id="time" width="16%">Время</th>
-                        <th onClick={(event) => props.ls(event)} id="minutes" width="16%">Минут</th>
+                        <th id="calId" width="5%">ID</th>
+                        <th id="abonentName" width="16%">Имя абонента</th>
+                        <th id="cityName" width="16%">Название города</th>
+                        <th id="date" width="16%">Дата</th>
+                        <th id="time" width="16%">Время</th>
+                        <th id="minutes" width="16%">Минут</th>
                         <th name="operations" width="16%"></th>
                     </tr>
                     </thead>
@@ -114,24 +112,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteCall: (id) => {
             dispatch(deleteCall(id))
-            dispatch(loadCalls(1, orderBy, orderDir))
+            dispatch(loadCalls(1))
         },
         ls: (event, page = 1) => {
             currentPage = page;
-            if (event.target.id !== "") {
-                if (event.target.id !== orderBy) {
-                    orderBy = event.target.id;
-                    orderDir = 'asc';
-                }
-                if (orderBy !== "") {
-                    if (orderDir === 'desc') {
-                        orderDir = 'asc'
-                    } else {
-                        orderDir = 'desc'
-                    }
-                }
-            }
-            dispatch(loadCalls(page, orderBy, orderDir))
+            dispatch(loadCalls(page))
         },
     }
 }

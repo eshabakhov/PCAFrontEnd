@@ -1,11 +1,8 @@
 let pageSize = 10
 
-export function loadUsers(page = 1, orderBy = null, orderDir = null) {
+export function loadUsers(page = 1) {
     return async dispatch => {
         let url = `/users/list?page=${page}&pageSize=${pageSize}`
-        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
-            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
-        }
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -68,12 +65,9 @@ export function deleteUser(id) {
 }
 
 
-export function loadAbonents(page = 1, orderBy = null, orderDir = null) {
+export function loadAbonents(page = 1) {
     return async dispatch => {
         let url = `/abonents/list?page=${page}&pageSize=${pageSize}`
-        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
-            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
-        }
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -137,12 +131,9 @@ export function deleteAbonent(id) {
 }
 
 
-export function loadCalls(page = 1, orderBy = null, orderDir = null) {
+export function loadCalls(page = 1) {
     return async dispatch => {
         let url = `/calls/list?page=${page}&pageSize=${pageSize}`
-        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
-            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
-        }
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -204,12 +195,9 @@ export function deleteCall(id) {
     }
 }
 
-export function loadCities(page = 1, orderBy = null, orderDir = null) {
+export function loadCities(page = 1) {
     return async dispatch => {
         let url = `/cities/list?page=${page}&pageSize=${pageSize}`
-        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
-            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
-        }
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -271,12 +259,9 @@ export function deleteCity(id) {
     }
 }
 
-export function loadAudits(page = 1, orderBy = null, orderDir = null) {
+export function loadAudits(page = 1) {
     return async dispatch => {
         let url = `/audit/list?page=${page}&pageSize=${pageSize}`
-        if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
-            url += `&orderby=${orderBy}&orderdir=${orderDir}`;
-        }
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({

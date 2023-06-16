@@ -8,8 +8,6 @@ import {deleteUser, loadUsers} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
 
 let currentPage = 1;
-let orderDir = "desc";
-let orderBy = "";
 let firstRenderRef = true
 
 function User(props) {
@@ -43,10 +41,10 @@ function User(props) {
                     <thead className={classes.t_head}>
                     <tr>
                         <th name="login" width="20%">Логин</th>
-                        <th onClick={(event) => props.ls(event)} id="name" width="20%">Имя</th>
-                        <th onClick={(event) => props.ls(event)} id="surname" width="20%">Фамилия</th>
-                        <th onClick={(event) => props.ls(event)} id="patronymic" width="20%">Отчество</th>
-                        <th onClick={(event) => props.ls(event)} id="isAdmin" width="20%">Роль</th>
+                        <th id="name" width="20%">Имя</th>
+                        <th id="surname" width="20%">Фамилия</th>
+                        <th id="patronymic" width="20%">Отчество</th>
+                        <th id="isAdmin" width="20%">Роль</th>
                     </tr>
                     </thead>
                 </Table>
@@ -99,24 +97,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteUser: (id) => {
             dispatch(deleteUser(id))
-            dispatch(loadUsers(1, orderBy, orderDir))
+            dispatch(loadUsers(1))
         },
         ls: (event, page = 1) => {
             currentPage = page;
-            if (event.target.id !== "") {
-                if (event.target.id !== orderBy) {
-                    orderBy = event.target.id;
-                    orderDir = 'asc';
-                }
-                if (orderBy !== "") {
-                    if (orderDir === 'desc') {
-                        orderDir = 'asc'
-                    } else {
-                        orderDir = 'desc'
-                    }
-                }
-            }
-            dispatch(loadUsers(page, orderBy, orderDir))
+            dispatch(loadUsers(page))
         },
     }
 }

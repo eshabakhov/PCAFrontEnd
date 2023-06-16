@@ -8,8 +8,6 @@ import {loadAudits} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
 
 let currentPage = 1;
-let orderDir = "desc";
-let orderBy = "";
 let firstRenderRef = true
 
 function Audit(props) {
@@ -41,11 +39,11 @@ function Audit(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th onClick={(event) => props.ls(event)} id="id" width="5%">ID</th>
-                        <th onClick={(event) => props.ls(event)} id="username" width="16%">Имя пользователя</th>
-                        <th onClick={(event) => props.ls(event)} id="endpoint" width="16%">Адрес</th>
-                        <th onClick={(event) => props.ls(event)} id="method" width="16%">Метод</th>
-                        <th onClick={(event) => props.ls(event)} id="datetime" width="16%">Дата и время</th>
+                        <th id="id" width="5%">ID</th>
+                        <th id="username" width="16%">Имя пользователя</th>
+                        <th id="endpoint" width="16%">Адрес</th>
+                        <th id="method" width="16%">Метод</th>
+                        <th id="datetime" width="16%">Дата и время</th>
                     </tr>
                     </thead>
                 </Table>
@@ -92,20 +90,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ls: (event, page = 1) => {
             currentPage = page;
-            if (event.target.id !== "") {
-                if (event.target.id !== orderBy) {
-                    orderBy = event.target.id;
-                    orderDir = 'asc';
-                }
-                if (orderBy !== "") {
-                    if (orderDir === 'desc') {
-                        orderDir = 'asc'
-                    } else {
-                        orderDir = 'desc'
-                    }
-                }
-            }
-            dispatch(loadAudits(page, orderBy, orderDir))
+            dispatch(loadAudits(page))
         },
     }
 }
