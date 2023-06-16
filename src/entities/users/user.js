@@ -67,10 +67,10 @@ function User(props) {
                                     Добавить пользователя
                                 </Button>
                             </td>
-                            <td width="78%"/>{/* убрать эту штуку*/}
-                            <td width="10%">
+                            <td width="70%"/>{/* убрать эту штуку*/}
+                            <td width="18%">
                                 <Pagination align="right" className={classes.mt}
-                                            count={props.usersPageCount} shape="rounded"
+                                            count={Math.ceil(props.total / props.pageSize)} shape="rounded"
                                             onChange={(event, page) => props.ls(event, page)}
                                             page={currentPage}
                                             defaultPage={currentPage}
@@ -88,8 +88,9 @@ function mapStateToProps(state) {
     const {userReducer} = state;
     return {
         users: userReducer.users,
-        usersCount: userReducer.usersCount,
-        usersPageCount: userReducer.usersPageCount,
+        currentPage: userReducer.currentPage,
+        pageSize: userReducer.pageSize,
+        total: userReducer.total
     }
 }
 
