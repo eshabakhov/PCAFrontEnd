@@ -15,6 +15,7 @@ function UserAdd(props) {
     const emptyUser = {
         login: '',
         passwordHash: '',
+        passwordCheck: '',
         name: '',
         surname: '',
         patronymic: '',
@@ -42,8 +43,12 @@ function UserAdd(props) {
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
-                submit(event, props.addUser, user);
-                navigate("/users/")
+                if (user.passwordHash !== user.passwordCheck) {
+                    alert("Пароли не совпадают");
+                } else {
+                    submit(event, props.addUser, user);
+                    navigate("/users/")
+                }
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="login">Логин</Label><br/>
@@ -71,9 +76,9 @@ function UserAdd(props) {
                            onChange={handleChange} autoComplete="passwordHash" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="checkPassword">Подтверждение пароля</Label><br/>
-                    <Input className={classes.input} type="text" name="checkPassword" id="checkPassword" value={user.passwordHash || ''}
-                           onChange={handleChange} autoComplete="checkPassword" required/>
+                    <Label className={classes.label} for="passwordCheck">Подтверждение пароля</Label><br/>
+                    <Input className={classes.input} type="text" name="passwordCheck" id="passwordCheck" value={user.passwordCheck || ''}
+                           onChange={handleChange} autoComplete="passwordCheck" required/>
                 </FormGroup>
                 <FormGroup>
                     <FormControlLabel
