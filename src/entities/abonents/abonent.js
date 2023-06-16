@@ -54,7 +54,7 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th onClick={(event) => props.ls(event)} id="abonentId" width="5%">ID</th>
+                        <th onClick={(event) => props.ls(event)} id="id" width="5%">ID</th>}
                         <th onClick={(event) => props.ls(event)} id="phoneNumber" width="16%">Номер телефона</th>
                         <th onClick={(event) => props.ls(event)} id="inn" width="16%">ИНН</th>
                         <th onClick={(event) => props.ls(event)} id="address" width="16%">Адрес</th>
@@ -77,13 +77,13 @@ function Abonent(props) {
                     <tr>
                         <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/abonents/new")}>
-                                Добавить переговор
+                                Добавить абонента
                             </Button>
                         </td>
-                        <td width="78%"/>
-                        <td width="10%">
+                        <td width="70%"/>
+                        <td width="18%">
                             <Pagination align="right" className={classes.mt}
-                                        count={props.abonentsPageCount} shape="rounded"
+                                        count={Math.ceil(props.total / props.pageSize)} shape="rounded"
                                         onChange={(event, page) => props.ls(event, page)}
                                         page={currentPage}
                                         defaultPage={currentPage}
@@ -101,8 +101,9 @@ function mapStateToProps(state) {
     const {abonentReducer} = state;
     return {
         abonents: abonentReducer.abonents,
-        abonentsCount: abonentReducer.abonentsCount,
-        abonentsPageCount: abonentReducer.abonentsPageCount,
+        currentPage: abonentReducer.currentPage,
+        pageSize: abonentReducer.pageSize,
+        total: abonentReducer.total
     }
 }
 

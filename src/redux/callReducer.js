@@ -1,7 +1,8 @@
 let initialState = {
     calls: [],
-    callsCount: 0,
-    callsPageCount: 0,
+    currentPage: 0,
+    pageSize: 0,
+    total: 0,
 }
 
 export const callReducer = (state = initialState, action) => {
@@ -15,7 +16,7 @@ export const callReducer = (state = initialState, action) => {
                 calls: loadCall
             }
         case 'LOAD_CALLS':
-            let loadCalls = action.data.map(res => {
+            let loadCalls = action.data.list.map(res => {
                 return {
                     id: res.id,
                     abonentName: res.abonentName,
@@ -29,8 +30,9 @@ export const callReducer = (state = initialState, action) => {
             return {
                 ...state,
                 calls: loadCalls,
-                callsCount: action.callsCount,
-                callsPageCount: action.callsPageCount
+                currentPage: action.data.currentPage,
+                pageSize: action.data.pageSize,
+                total: action.data.total,
             }
         case 'ADD_CALL':
             const addCall = state.calls.filter((call) => call.id !== action.call.id)

@@ -5,6 +5,7 @@ import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
 import {editAbonent} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 function AbonentEdit(props) {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function AbonentEdit(props) {
     const {id} = useParams();
 
     const emptyAbonent = {
+        id: '',
         phoneNumber: '',
         inn: '',
         address: '',
@@ -39,22 +41,22 @@ function AbonentEdit(props) {
                 navigate("/")
             }}>
                 <FormGroup>
-                    <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
+                    <Label className={classes.label} for="phoneNumber">Логин</Label><br/>
                     <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber" value={abonent.phoneNumber || ''}
                            onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">Инн</Label><br/>
+                    <Label className={classes.label} for="inn">Логин</Label><br/>
                     <Input className={classes.input} type="text" name="inn" id="inn" value={abonent.inn || ''}
                            onChange={handleChange} autoComplete="inn" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="address">Адрес</Label><br/>
+                    <Label className={classes.label} for="address">Логин</Label><br/>
                     <Input className={classes.input} type="text" name="address" id="address" value={abonent.address || ''}
                            onChange={handleChange} autoComplete="address" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="name">Имя</Label><br/>
+                    <Label className={classes.label} for="name">Логин</Label><br/>
                     <Input className={classes.input} type="text" name="name" id="name" value={abonent.name || ''}
                            onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>

@@ -12,6 +12,7 @@ function AbonentAdd(props) {
     const navigate = useNavigate();
 
     const emptyAbonent = {
+        id: '',
         phoneNumber: '',
         inn: '',
         address: '',

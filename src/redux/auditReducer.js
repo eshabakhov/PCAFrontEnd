@@ -1,14 +1,15 @@
 let initialState = {
     audits: [],
-    auditsCount: 0,
-    auditsPageCount: 0,
+    currentPage: 0,
+    pageSize: 0,
+    total: 0,
 }
 
 export const auditReducer = (state = initialState, action) => {
     console.log(action);
     switch (action.type) {
         case 'LOAD_AUDITS':
-            let loadAudits = action.data.map(res => {
+            let loadAudits = action.data.list.map(res => {
                 return {
                     id: res.id,
                     username: res.username,
@@ -21,8 +22,9 @@ export const auditReducer = (state = initialState, action) => {
             return {
                 ...state,
                 audits: loadAudits,
-                auditsCount: action.auditsCount,
-                auditsPageCount: action.auditsPageCount
+                currentPage: action.data.currentPage,
+                pageSize: action.data.pageSize,
+                total: action.data.total
             }
         default:
             return state;

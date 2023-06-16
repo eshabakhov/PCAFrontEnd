@@ -82,10 +82,10 @@ function City(props) {
                                 Добавить город
                             </Button>
                         </td>
-                        <td width="78%"/>
-                        <td width="10%">
+                        <td width="70%"/>
+                        <td width="18%">
                             <Pagination align="right" className={classes.mt}
-                                        count={props.citiesPageCount} shape="rounded"
+                                        count={Math.ceil(props.total / props.pageSize)} shape="rounded"
                                         onChange={(event, page) => props.ls(event, page)}
                                         page={currentPage}
                                         defaultPage={currentPage}
@@ -103,8 +103,9 @@ function mapStateToProps(state) {
     const {cityReducer} = state;
     return {
         cities: cityReducer.cities,
-        citiesCount: cityReducer.citiesCount,
-        citiesPageCount: cityReducer.citiesPageCount,
+        currentPage: cityReducer.currentPage,
+        pageSize: cityReducer.pageSize,
+        total: cityReducer.total
     }
 }
 

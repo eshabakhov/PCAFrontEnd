@@ -14,7 +14,6 @@ let firstRenderRef = true
 
 function Audit(props) {
     const dispatch = useDispatch()
-
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -26,7 +25,7 @@ function Audit(props) {
         firstRenderRef = false
     }, [])
 
-    console.log(props);
+    console.log(33333, props);
     const auditList = props.audits.map(audit => {
         return <tr className={classes.t_row} key={audit.id}>
             <td width="5%">{audit.id}</td>
@@ -62,10 +61,9 @@ function Audit(props) {
                 <Table className={classes.table}>
                     <tbody>
                     <tr>
-                        <td width="90%"/>
-                        <td width="10%">
+                        <td>
                             <Pagination align="right" className={classes.mt}
-                                        count={props.auditsPageCount} shape="rounded"
+                                        count={Math.ceil(props.total / props.pageSize)} shape="rounded"
                                         onChange={(event, page) => props.ls(event, page)}
                                         page={currentPage}
                                         defaultPage={currentPage}
@@ -83,8 +81,9 @@ function mapStateToProps(state) {
     const {auditReducer} = state;
     return {
         audits: auditReducer.audits,
-        auditsCount: auditReducer.auditsCount,
-        auditsPageCount: auditReducer.auditsPageCount,
+        currentPage: auditReducer.currentPage,
+        pageSize: auditReducer.pageSize,
+        total: auditReducer.total
     }
 }
 

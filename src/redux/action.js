@@ -1,3 +1,5 @@
+let pageSize = 10
+
 export function loadUsers(page = 0, orderBy = null, orderDir = null) {
     let size = 10
     if (page > 0) {
@@ -70,13 +72,9 @@ export function deleteUser(id) {
 }
 
 
-export function loadAbonents(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadAbonents(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/abonents/list?page=${page * size}&pageSize=${size}`
+        let url = `/abonents/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
@@ -123,7 +121,7 @@ export function editAbonent(abonent) {
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_ABONENT',
-            user: jsonData
+            abonent: jsonData
         })
     }
 }
@@ -143,13 +141,9 @@ export function deleteAbonent(id) {
 }
 
 
-export function loadCalls(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadCalls(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/calls/list?page=${page * size}&pageSize=${size}`
+        let url = `/calls/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
@@ -214,14 +208,9 @@ export function deleteCall(id) {
     }
 }
 
-
-export function loadCities(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadCities(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/cities/list?page=${page * size}&pageSize=${size}`
+        let url = `/cities/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
@@ -234,7 +223,7 @@ export function loadCities(page = 0, orderBy = null, orderDir = null) {
     }
 }
 
-export function addCity(user) {
+export function addCity(city) {
     return async dispatch => {
         fetch('/cities', {
             method: 'POST',
@@ -242,19 +231,19 @@ export function addCity(user) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(city)
         }).then(async response => response.json())
-            .then(user =>
+            .then(city =>
                 dispatch({
                     type: 'ADD_CITY',
-                    user
+                    city
                 })).catch(() => {
         })
     }
 }
 
-export function editCity(user) {
-    console.log(user)
+export function editCity(city) {
+    console.log(city)
     return async dispatch => {
         const response = await fetch(`/cities`, {
             method: 'PUT',
@@ -262,12 +251,12 @@ export function editCity(user) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(city)
         })
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_CITY',
-            user: jsonData
+            city: jsonData
         })
     }
 }
@@ -286,13 +275,9 @@ export function deleteCity(id) {
     }
 }
 
-export function loadAudits(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadAudits(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/audit/list?page=${page * size}&pageSize=${size}`
+        let url = `/audit/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
