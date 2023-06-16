@@ -41,22 +41,22 @@ function AbonentEdit(props) {
                 navigate("/")
             }}>
                 <FormGroup>
-                    <Label className={classes.label} for="phoneNumber">Логин</Label><br/>
+                    <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
                     <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber" value={abonent.phoneNumber || ''}
                            onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">Логин</Label><br/>
+                    <Label className={classes.label} for="inn">ИНН</Label><br/>
                     <Input className={classes.input} type="text" name="inn" id="inn" value={abonent.inn || ''}
                            onChange={handleChange} autoComplete="inn" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="address">Логин</Label><br/>
+                    <Label className={classes.label} for="address">Адрес</Label><br/>
                     <Input className={classes.input} type="text" name="address" id="address" value={abonent.address || ''}
                            onChange={handleChange} autoComplete="address" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="name">Логин</Label><br/>
+                    <Label className={classes.label} for="name">Имя</Label><br/>
                     <Input className={classes.input} type="text" name="name" id="name" value={abonent.name || ''}
                            onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>

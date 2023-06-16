@@ -60,7 +60,7 @@ function City(props) {
                         <th onClick={(event) => props.ls(event)} id="nightRate" width="16%">Тариф ночной</th>
                         <th onClick={(event) => props.ls(event)} id="dayRate" width="16%">Тариф дневной</th>
                         <th onClick={(event) => props.ls(event)} id="discountPercent" width="16%">Размер скидки</th>
-                        <th onClick={(event) => props.ls(event)} id="discountCallMinutes" width="16%">Порог скидки</th>
+                        <th onClick={(event) => props.ls(event)} id="discountCallMinutes" width="16%">ППорог скидки</th>
                         <th name="operations" width="16%"></th>
                     </tr>
                     </thead>
