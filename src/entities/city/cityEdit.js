@@ -14,10 +14,14 @@ function CityEdit(props) {
     const {id} = useParams();
 
     const emptyCity = {
-        phoneNumber: '',
-        inn: '',
-        address: '',
+        id: '',
+        nightRate: '',
+        dayRate: '',
+        name: '',
+        discountPercent: '',
+        discountCallMinutes: ''
     };
+
     const [city, setCity] = useState(emptyCity)
     const classes = useStyles();
     // Получаем редактируемую задачу
@@ -29,7 +33,7 @@ function CityEdit(props) {
     }
 
     console.log(city)
-    const title = <h2>{'Редактировать абонента'}</h2>;
+    const title = <h2>{'Редактировать города'}</h2>;
     return <div className={classes.modal}>
         <Container align="center">
             {title}
@@ -38,19 +42,33 @@ function CityEdit(props) {
                 navigate("/")
             }}>
                 <FormGroup>
-                    <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
-                    <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber" value={city.phoneNumber || ''}
+                    <Label className={classes.label} for="name">Название города</Label><br/>
+                    <Input className={classes.input} type="text" name="name" id="name"
+                           value={city.name || ''}
                            onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">Инн</Label><br/>
-                    <Input className={classes.input} type="text" name="inn" id="inn" value={city.inn || ''}
-                           onChange={handleChange} autoComplete="inn" required/>
+                    <Label className={classes.label} for="nightRate">Тариф ночной</Label><br/>
+                    <Input className={classes.input} type="text" name="nightRate" id="nightRate"
+                           value={city.nightRate || ''}
+                           onChange={handleChange} autoComplete="nightRate" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="address">Адрес</Label><br/>
-                    <Input className={classes.input} type="text" name="address" id="address" value={city.address || ''}
-                           onChange={handleChange} autoComplete="address" required/>
+                    <Label className={classes.label} for="dayRate">Тариф дневной</Label><br/>
+                    <Input className={classes.input} type="text" name="dayRate" id="dayRate" value={city.dayRate || ''}
+                           onChange={handleChange} autoComplete="dayRate" required/>
+                </FormGroup>
+                <FormGroup>
+                    <Label className={classes.label} for="discountPercent">Размер скидки</Label><br/>
+                    <Input className={classes.input} type="text" name="discountPercent" id="discountPercent"
+                           value={city.discountPercent || ''}
+                           onChange={handleChange} autoComplete="discountPercent" required/>
+                </FormGroup>
+                <FormGroup>
+                    <Label className={classes.label} for="discountCallMinutes">Порог скидки</Label><br/>
+                    <Input className={classes.input} type="text" name="discountCallMinutes" id="discountCallMinutes"
+                           value={city.discountCallMinutes || ''}
+                           onChange={handleChange} autoComplete="discountCallMinutes" required/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}

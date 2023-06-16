@@ -3,50 +3,66 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addAbonent} from "../../redux/action";
+import {addCity} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
 
-function AbonentAdd(props) {
+function CityAdd(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const emptyAbonent = {
-        phoneNumber: '',
-        inn: '',
-        address: '',
+    const emptyCity = {
+        id: '',
+        nightRate: '',
+        dayRate: '',
+        name: '',
+        discountPercent: '',
+        discountCallMinutes: ''
     };
-    const [city, setAbonent] = useState(emptyAbonent)
+    const [city, setCity] = useState(emptyCity)
 
     const classes = useStyles();
     useEffect(() => {
     }, []);
     const handleChange = event => {
-        change(event, setAbonent, city)
+        change(event, setCity, city)
     }
     console.log(city)
-    const title = <h2>{'Добавить абонента'}</h2>;
+    const title = <h2>{'Добавить город'}</h2>;
     return <div className={classes.modal}>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
-                submit(event, props.addAbonent, city);
+                submit(event, props.addCity, city);
                 navigate("/?tab=" + 0)
             }}>
                 <FormGroup>
-                    <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>
-                    <Input className={classes.input} type="text" name="phoneNumber" id="phoneNumber"
-                           value={city.phoneNumber || ''}
+                    <Label className={classes.label} for="name">Название города</Label><br/>
+                    <Input className={classes.input} type="text" name="name" id="name"
+                           value={city.name || ''}
                            onChange={handleChange} autoComplete="phoneNumber" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">ИНН</Label><br/>
-                    <Input className={classes.input} type="text" name="inn" id="inn" value={city.inn || ''}
-                           onChange={handleChange} autoComplete="inn" required/>
+                    <Label className={classes.label} for="nightRate">Тариф ночной</Label><br/>
+                    <Input className={classes.input} type="text" name="nightRate" id="nightRate"
+                           value={city.nightRate || ''}
+                           onChange={handleChange} autoComplete="nightRate" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="surname">Адрес</Label><br/>
-                    <Input className={classes.input} type="text" name="address" id="address" value={city.address || ''}
-                           onChange={handleChange} autoComplete="address" required/>
+                    <Label className={classes.label} for="dayRate">Тариф дневной</Label><br/>
+                    <Input className={classes.input} type="text" name="dayRate" id="dayRate" value={city.dayRate || ''}
+                           onChange={handleChange} autoComplete="dayRate" required/>
+                </FormGroup>
+                <FormGroup>
+                    <Label className={classes.label} for="discountPercent">Размер скидки</Label><br/>
+                    <Input className={classes.input} type="text" name="discountPercent" id="discountPercent"
+                           value={city.discountPercent || ''}
+                           onChange={handleChange} autoComplete="discountPercent" required/>
+                </FormGroup>
+                <FormGroup>
+                    <Label className={classes.label} for="discountCallMinutes">Порог скидки</Label><br/>
+                    <Input className={classes.input} type="text" name="discountCallMinutes" id="discountCallMinutes"
+                           value={city.discountCallMinutes || ''}
+                           onChange={handleChange} autoComplete="discountCallMinutes" required/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
@@ -65,7 +81,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    addAbonent
+    addCity
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AbonentAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(CityAdd);
