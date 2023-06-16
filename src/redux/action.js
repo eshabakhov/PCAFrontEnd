@@ -216,14 +216,9 @@ export function deleteCall(id) {
     }
 }
 
-
-export function loadCities(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadCities(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/cities/list?page=${page * size}&pageSize=${size}`
+        let url = `/cities/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
