@@ -18,10 +18,6 @@ function User(props) {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const handleRemoveClick = event => {
-        props.deleteUser(Number(event.target.id))
-    }
-
     useEffect(() => {
         if (!firstRenderRef) {
             return
@@ -32,20 +28,12 @@ function User(props) {
 
     console.log(props);
     const userList = props.users.map(user => {
-        return <tr className={classes.t_row} key={user.id}>
-            <td width="16%">{user.login}</td>
-            <td width="16%">{user.name}</td>
-            <td width="16%">{user.surname}</td>
-            <td width="16%">{user.patronymic}</td>
-            <td width="16%">{user.isAdmin || ""}</td>
-            <td width="16%">
-                <ButtonGroup>
-                    <Button className={classes.button_com} onClick={() =>
-                        navigate("/users/" + user.id)}>Изменить</Button>
-                    <Button id={user.id} className={classes.button_delete}
-                            onClick={handleRemoveClick}>Удалить</Button>
-                </ButtonGroup>
-            </td>
+        return <tr onClick={()=>navigate("/users/"+user.id)} className={classes.t_row} key={user.id}>
+            <td width="20%">{user.login}</td>
+            <td width="20%">{user.name}</td>
+            <td width="20%">{user.surname}</td>
+            <td width="20%">{user.patronymic}</td>
+            <td width="20%">{user.isAdmin || ""}</td>
         </tr>
     });
     return (
@@ -54,12 +42,11 @@ function User(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th name="login" width="16%">Логин</th>
-                        <th onClick={(event) => props.ls(event)} id="name" width="16%">Имя</th>
-                        <th onClick={(event) => props.ls(event)} id="surname" width="16%">Фамилия</th>
-                        <th onClick={(event) => props.ls(event)} id="patronymic" width="16%">Отчество</th>
-                        <th onClick={(event) => props.ls(event)} id="isAdmin" width="16%">Роль</th>
-                        <th name="operations" width="16%">Операции</th>
+                        <th name="login" width="20%">Логин</th>
+                        <th onClick={(event) => props.ls(event)} id="name" width="20%">Имя</th>
+                        <th onClick={(event) => props.ls(event)} id="surname" width="20%">Фамилия</th>
+                        <th onClick={(event) => props.ls(event)} id="patronymic" width="20%">Отчество</th>
+                        <th onClick={(event) => props.ls(event)} id="isAdmin" width="20%">Роль</th>
                     </tr>
                     </thead>
                 </Table>

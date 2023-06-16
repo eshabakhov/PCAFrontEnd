@@ -31,7 +31,6 @@ export const userReducer = (state = initialState, action) => {
                     isAdmin: res.isAdmin,
                 }
             })
-
             return {
                 ...state,
                 users: loadUsers,
@@ -40,6 +39,11 @@ export const userReducer = (state = initialState, action) => {
             }
         case 'ADD_USER':
             const addUser = state.users.filter((user) => user.id !== action.user.id)
+            if (action.user.isAdmin) {
+                action.user.isAdmin = "Администратор"
+            } else {
+                action.user.isAdmin = "Пользователь"
+            }
             addUser.push(action.user)
             return {
                 ...state,
@@ -48,6 +52,11 @@ export const userReducer = (state = initialState, action) => {
 
         case 'EDIT_USER':
             const editUser = state.users.filter((user) => user.id !== action.user.id)
+            if (action.user.isAdmin) {
+                action.user.isAdmin = "Администратор"
+            } else {
+                action.user.isAdmin = "Пользователь"
+            }
             editUser.push(action.user)
             return {
                 ...state,

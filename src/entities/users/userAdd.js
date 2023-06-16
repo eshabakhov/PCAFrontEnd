@@ -43,7 +43,7 @@ function UserAdd(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addUser, user);
-                navigate("/?tab=" + 0)
+                navigate("/users/")
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="login">Логин</Label><br/>

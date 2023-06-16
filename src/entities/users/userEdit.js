@@ -3,10 +3,12 @@ import useStyles from "../../style";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
-import {editUser} from "../../redux/action";
+import {deleteUser, editUser, loadUsers} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
 import {Checkbox, FormControlLabel} from "@mui/material";
 
+let orderDir = "desc";
+let orderBy = "";
 function UserEdit(props) {
     const dispatch = useDispatch();
 
@@ -23,6 +25,8 @@ function UserEdit(props) {
         isAdmin: '',
     };
     const [user, setUser] = useState(emptyUser)
+    const [checked, setChecked] = useState(true)
+
     const classes = useStyles();
     // Получаем редактируемую задачу
     useEffect(() => {
@@ -30,6 +34,15 @@ function UserEdit(props) {
     }, []);
     const handleChange = event => {
         change(event, setUser, user)
+    }
+    const handleRemoveClick = event => {
+        props.deleteUser(Number(event.target.id))
+        navigate("/users/")
+    }
+    const handleChangeCheckBox = event => {
+        console.log(event.target.checked)
+        setChecked(event.target.checked)
+        user.isAdmin=event.target.checked
     }
 
     console.log(user)
@@ -72,11 +85,20 @@ function UserEdit(props) {
                            onChange={handleChange} autoComplete="checkPassword" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormControlLabel required control={<Checkbox value={user.isAdmin || ''}/>} label="Администратор" />
+                    <FormControlLabel
+                        control=
+                            {
+                                <Checkbox className={classes.input} type="checkbox" onChange={handleChangeCheckBox}
+                                          value={user.isAdmin} name="isAdmin" id="isAdmin" autoComplete="isAdmin"/>
+                            }
+                        label="Администратор"
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_delete} tag={Link} to="/">Отменить</Button>
+                    <Button className={classes.button_delete} tag={Link} to="/users/">Отменить</Button>
+                    <Button id={user.id} className={classes.button_delete}
+                            onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>
             </Form>
         </Container>
@@ -90,8 +112,17 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = {
-    editUser
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteUser: (id) => {
+            dispatch(deleteUser(id))
+            dispatch(loadUsers(1, orderBy, orderDir))
+        },
+        editUser: (id)=> {
+            dispatch(editUser(id))
+            dispatch(loadUsers(1, orderBy, orderDir))
+        },
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserEdit);
