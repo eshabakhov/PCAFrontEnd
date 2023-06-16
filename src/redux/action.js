@@ -141,13 +141,9 @@ export function deleteAbonent(id) {
 }
 
 
-export function loadCalls(page = 0, orderBy = null, orderDir = null) {
-    let size = 10
-    if (page > 0) {
-        page--;
-    }
+export function loadCalls(page = 1, orderBy = null, orderDir = null) {
     return async dispatch => {
-        let url = `/calls/list?page=${page * size}&pageSize=${size}`
+        let url = `/calls/list?page=${page}&pageSize=${pageSize}`
         if (orderBy !== "" && orderDir !== "" && orderBy !== null && orderDir !== null) {
             url += `&orderby=${orderBy}&orderdir=${orderDir}`;
         }
