@@ -10,6 +10,7 @@ import CallAdd from "./entities/calls/callAdd";
 import CallEdit from "./entities/calls/callEdit";
 import CityEdit from "./entities/city/cityEdit";
 import CityAdd from "./entities/city/cityAdd";
+import Login from "./login/login";
 
 function App() {
     document.title = 'Учет телефонных звонков'
@@ -18,6 +19,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path='/' exact={true} element={<Home/>}/>
+                    <Route exact={true} path='/login' element={<Login/>}/>
                     <Route path='/:tab' exact={true} element={<Home/>}/>
                     <Route path='/users/new' exact={true} element={<UserAdd/>}/>
                     <Route path='/users/:id' exact={true} element={<UserEdit/>}/>

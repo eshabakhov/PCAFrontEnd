@@ -2,6 +2,7 @@ let initialState = {
     users: [],
     usersCount: 0,
     usersPageCount: 0,
+    is_admin: false
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -60,6 +61,12 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 users: deleteUser
             }
+        case 'LOAD_CONTEXT':
+            console.log(action);
+            return {
+                ...state,
+                is_admin: action.is_admin
+            };
         default:
             return state;
     }
