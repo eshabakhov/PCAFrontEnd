@@ -17,6 +17,7 @@ function CallAdd(props) {
         date: '',
         time: '',
         minutes: '',
+        price: '',
     };
     const [call, setCall] = useState(emptyCall)
 

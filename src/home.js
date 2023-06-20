@@ -1,10 +1,9 @@
-import Animal from './entities/users/user';
+import User from './entities/users/user';
 import {useEffect, useState} from 'react';
 import useStyles from "./style";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Button, Container} from 'reactstrap';
 import {connect, useDispatch} from "react-redux";
-import User from "./entities/users/user";
 import Abonent from "./entities/abonents/abonent";
 import Call from "./entities/calls/call";
 import City from "./entities/city/city";
@@ -18,7 +17,7 @@ function Home(props) {
     const search = useLocation().search;
     const tab = new URLSearchParams(search).get('tab');
     const [activeTab, setActiveTab] = useState(tab ? Number(tab) : 0);
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const cookies = new Cookies();
 
     useEffect(() => {
@@ -29,8 +28,7 @@ function Home(props) {
         {title: 'Города', component: <City/>},
         {title: 'Переговоры', component: <Call/>},
     ];
-
-    if(cookies.get('isAdmin')){
+    if (cookies.get('isAdmin')) {
         tabs.push({title: 'Пользователи', component: <User/>});
         tabs.push({title: 'Аудит', component: <Audit/>});
 
@@ -73,7 +71,8 @@ function mapStateToProps(state) {
 }
 
 
-const mapDispatchToProps = (dispatch) => {}
+const mapDispatchToProps = (dispatch) => {
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

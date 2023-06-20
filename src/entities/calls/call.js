@@ -39,6 +39,7 @@ function Call(props) {
             <td width="16%">{call.date}</td>
             <td width="16%">{call.time}</td>
             <td width="16%">{call.minutes}</td>
+            <td width="16%">{call.price}</td>
             <td width="16%">
                 {cookies.get('isAdmin') &&
                     <ButtonGroup>
@@ -63,6 +64,7 @@ function Call(props) {
                         <th id="date" width="16%">Дата</th>
                         <th id="time" width="16%">Время</th>
                         <th id="minutes" width="16%">Минут</th>
+                        <th id="minutes" width="16%">Стоимость</th>
                         <th name="operations" width="16%"></th>
                     </tr>
                     </thead>

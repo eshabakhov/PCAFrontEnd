@@ -25,9 +25,9 @@ function App() {
                     <Route path='/users/:id' exact={true} element={<UserEdit/>}/>
                     <Route path='/abonents/new' exact={true} element={<AbonentAdd/>}/>
                     <Route path='/abonents/:id' exact={true} element={<AbonentEdit/>}/>
-                    <Route path='/calls' exact={true} element={<CallAdd/>}/>
+                    <Route path='/calls/new' exact={true} element={<CallAdd/>}/>
                     <Route path='/calls/:id' exact={true} element={<CallEdit/>}/>
-                    <Route path='/cities/' exact={true} element={<CityAdd/>}/>
+                    <Route path='/cities/new' exact={true} element={<CityAdd/>}/>
                     <Route path='/cities/:id' exact={true} element={<CityEdit/>}/>
                 </Routes>
             </Router>

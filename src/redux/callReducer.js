@@ -24,6 +24,7 @@ export const callReducer = (state = initialState, action) => {
                     date: res.date,
                     time: res.time,
                     minutes: res.minutes,
+                    price: res.price
                 }
             })
 

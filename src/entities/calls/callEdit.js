@@ -20,6 +20,7 @@ function CallEdit(props) {
         date: '',
         time: '',
         minutes: '',
+        price: ''
     };
     const [call, setCall] = useState(emptyCall)
     const classes = useStyles();
