@@ -96,7 +96,7 @@ function UserEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_delete} tag={Link} to="/users/">Отменить</Button>
+                    <Button className={classes.button_cancel} tag={Link} to="/users/">Отменить</Button>
                     <Button id={user.id} className={classes.button_delete}
                             onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>
