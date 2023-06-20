@@ -6,6 +6,7 @@ import Pagination from '@mui/material/Pagination';
 import useStyles from "../../style";
 import {deleteAbonent, loadAbonents} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
+import {Cookies} from "react-cookie";
 
 let currentPage = 1;
 let firstRenderRef = true
@@ -15,6 +16,7 @@ function Abonent(props) {
 
     const classes = useStyles();
     const navigate = useNavigate();
+    const cookies = new Cookies();
 
     const handleRemoveClick = event => {
         props.deleteAbonent(Number(event.target.id))
@@ -37,7 +39,7 @@ function Abonent(props) {
             <td width="16%">{abonent.address}</td>
             <td width="16%">{abonent.name}</td>
             <td width="16%">
-                {props.is_admin &&
+                {cookies.get('isAdmin') &&
                     <ButtonGroup>
                         <Button className={classes.button_com} onClick={() =>
                             navigate("/abonents/" + abonent.id)}>Изменить</Button>

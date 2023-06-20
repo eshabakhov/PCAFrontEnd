@@ -10,6 +10,7 @@ import Call from "./entities/calls/call";
 import City from "./entities/city/city";
 import Audit from "./entities/audit/audit";
 import {logout} from "./redux/action";
+import {Cookies} from "react-cookie";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Home(props) {
     const tab = new URLSearchParams(search).get('tab');
     const [activeTab, setActiveTab] = useState(tab ? Number(tab) : 0);
     const dispatch=useDispatch()
+    const cookies = new Cookies();
 
     useEffect(() => {
     })
@@ -27,7 +29,8 @@ function Home(props) {
         {title: 'Города', component: <City/>},
         {title: 'Переговоры', component: <Call/>},
     ];
-    if(props.is_admin) {
+
+    if(cookies.get('isAdmin')){
         tabs.push({title: 'Пользователи', component: <User/>});
         tabs.push({title: 'Аудит', component: <Audit/>});
 

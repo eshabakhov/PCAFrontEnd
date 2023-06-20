@@ -6,6 +6,7 @@ import useStyles from "../style";
 import {change} from '../handles'
 import {context} from "../redux/action";
 import {useNavigate} from "react-router-dom";
+import {Cookies} from "react-cookie";
 
 
 function Login(props) {
@@ -40,6 +41,8 @@ function Login(props) {
         }).then(async response => {
             if (response.status === 200) {
                 dispatch(context());
+                const cookies = new Cookies();
+                cookies.set('isAdmin', props.is_admin, { path: '/' });
                 navigate("/");
             } else {
                 alert("Не удалось войти");

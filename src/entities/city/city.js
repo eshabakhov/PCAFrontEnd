@@ -6,6 +6,7 @@ import Pagination from '@mui/material/Pagination';
 import useStyles from "../../style";
 import {deleteCity, loadCities} from "../../redux/action";
 import {useNavigate} from "react-router-dom";
+import {Cookies} from "react-cookie";
 
 let currentPage = 1;
 let firstRenderRef = true
@@ -15,6 +16,7 @@ function City(props) {
 
     const classes = useStyles();
     const navigate = useNavigate();
+    const cookies = new Cookies();
 
     const handleRemoveClick = event => {
         props.deleteCity(Number(event.target.id))
@@ -38,7 +40,7 @@ function City(props) {
             <td width="16%">{city.discountPercent}</td>
             <td width="16%">{city.discountCallMinutes}</td>
             <td width="16%">
-                {props.is_admin &&
+                {cookies.get('isAdmin') &&
                     <ButtonGroup>
                         <Button className={classes.button_com} onClick={() =>
                             navigate("/cities/" + city.id)}>Изменить</Button>
