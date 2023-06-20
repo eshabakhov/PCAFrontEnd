@@ -3,12 +3,13 @@ import {useEffect, useState} from 'react';
 import useStyles from "./style";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Button, Container} from 'reactstrap';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import User from "./entities/users/user";
 import Abonent from "./entities/abonents/abonent";
 import Call from "./entities/calls/call";
 import City from "./entities/city/city";
 import Audit from "./entities/audit/audit";
+import {logout} from "./redux/action";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -16,17 +17,21 @@ function Home(props) {
     const search = useLocation().search;
     const tab = new URLSearchParams(search).get('tab');
     const [activeTab, setActiveTab] = useState(tab ? Number(tab) : 0);
+    const dispatch=useDispatch()
 
     useEffect(() => {
     })
 
     const tabs = [
-        {title: 'Пользователи', component: <User/>},
         {title: 'Переговоры', component: <Call/>},
         {title: 'Абоненты', component: <Abonent/>},
-        {title: 'Города', component: <City/>},
-        {title: 'Аудит', component: <Audit/>},
+        {title: 'Города', component: <City/>}
     ];
+    if(props.is_admin) {
+        tabs.push({title: 'Пользователи', component: <User/>});
+        tabs.push({title: 'Аудит', component: <Audit/>});
+
+    }
     // Смена вкладки
     const openTab = event => {
         setActiveTab(Number(event.target.id));
@@ -49,21 +54,23 @@ function Home(props) {
                     </Button>
                 ))}
             </div>
+            <div align={"right"}>
+                <Button align="right" className={classes.button_com} onClick={dispatch(logout)}>Выход</Button>
+            </div>
             {<TabContent {...tabs[activeTab]} />}
         </Container>
     </div>
 }
 
 function mapStateToProps(state) {
-    const {authReducer} = state;
+    const {userReducer} = state;
     return {
+        is_admin: userReducer.is_admin
     }
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {}
-}
+const mapDispatchToProps = (dispatch) => {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

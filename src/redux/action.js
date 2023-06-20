@@ -2,19 +2,23 @@ let pageSize = 10
 
 export function loadUsers(page = 1) {
     return async dispatch => {
-        let url = `/users/list?page=${page}&pageSize=${pageSize}`
+        let url = `/api/users/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
-        const jsonData = await response.json();
-        dispatch({
-            type: 'LOAD_USERS',
-            data: jsonData,
-        })
+        if (response.status === 401) {
+            window.location.href = "/login"
+        } else if (response.status !== 403) {
+            const jsonData = await response.json();
+            dispatch({
+                type: 'LOAD_USERS',
+                data: jsonData,
+            })
+        }
     }
 }
 
 export function addUser(user) {
     return async dispatch => {
-        fetch('/users', {
+        fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -67,7 +71,7 @@ export function deleteUser(id) {
 
 export function loadAbonents(page = 1) {
     return async dispatch => {
-        let url = `/abonents/list?page=${page}&pageSize=${pageSize}`
+        let url = `/api/abonents/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -79,7 +83,7 @@ export function loadAbonents(page = 1) {
 
 export function addAbonent(abonent) {
     return async dispatch => {
-        fetch('/abonents', {
+        fetch('/api/abonents', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -100,7 +104,7 @@ export function addAbonent(abonent) {
 export function editAbonent(abonent) {
     console.log(abonent)
     return async dispatch => {
-        const response = await fetch(`/abonents`, {
+        const response = await fetch(`/api/abonents`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -118,12 +122,12 @@ export function editAbonent(abonent) {
 
 export function deleteAbonent(id) {
     return async dispatch => {
-        fetch(`/abonents/${id}`, {
+        fetch(`/api/abonents/${id}`, {
             method: 'DELETE',
         }).then(async response => response.json())
             .then(() =>
                 dispatch({
-                    type: 'DELETE_USER',
+                    type: 'DELETE_ABONENT',
                     id
                 })).catch(() => {
         })
@@ -133,7 +137,7 @@ export function deleteAbonent(id) {
 
 export function loadCalls(page = 1) {
     return async dispatch => {
-        let url = `/calls/list?page=${page}&pageSize=${pageSize}`
+        let url = `/api/calls/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -145,7 +149,7 @@ export function loadCalls(page = 1) {
 
 export function addCall(user) {
     return async dispatch => {
-        fetch('/calls', {
+        fetch('/api/calls', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -165,7 +169,7 @@ export function addCall(user) {
 export function editCall(user) {
     console.log(user)
     return async dispatch => {
-        const response = await fetch(`/calls`, {
+        const response = await fetch(`/api/calls`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -183,7 +187,7 @@ export function editCall(user) {
 
 export function deleteCall(id) {
     return async dispatch => {
-        fetch(`/calls/${id}`, {
+        fetch(`/api/calls/${id}`, {
             method: 'DELETE',
         }).then(async response => response.json())
             .then(() =>
@@ -197,7 +201,7 @@ export function deleteCall(id) {
 
 export function loadCities(page = 1) {
     return async dispatch => {
-        let url = `/cities/list?page=${page}&pageSize=${pageSize}`
+        let url = `/api/cities/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
@@ -209,7 +213,7 @@ export function loadCities(page = 1) {
 
 export function addCity(city) {
     return async dispatch => {
-        fetch('/cities', {
+        fetch('/api/cities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -229,7 +233,7 @@ export function addCity(city) {
 export function editCity(city) {
     console.log(city)
     return async dispatch => {
-        const response = await fetch(`/cities`, {
+        const response = await fetch(`/api/cities`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -247,7 +251,7 @@ export function editCity(city) {
 
 export function deleteCity(id) {
     return async dispatch => {
-        fetch(`/cities/${id}`, {
+        fetch(`/api/cities/${id}`, {
             method: 'DELETE',
         }).then(async response => response.json())
             .then(() =>
@@ -261,12 +265,36 @@ export function deleteCity(id) {
 
 export function loadAudits(page = 1) {
     return async dispatch => {
-        let url = `/audit/list?page=${page}&pageSize=${pageSize}`
+        let url = `/api/audit/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
         const jsonData = await response.json();
         dispatch({
             type: 'LOAD_AUDITS',
             data: jsonData,
         })
+    }
+}
+
+export function context() {
+    return async dispatch => {
+        const response = await fetch('/api/context', {
+            method: 'GET'
+        });
+        const jsonData = await response.json();
+        dispatch({
+            type: 'LOAD_CONTEXT',
+            is_admin: jsonData.isAdmin
+        })
+    }
+}
+
+export function logout() {
+    return async dispatch => {
+        fetch('/api/logout').then(res => {
+            window.location.href = "/login";
+            dispatch({
+                type: 'LOGOUT'
+            })
+        });
     }
 }

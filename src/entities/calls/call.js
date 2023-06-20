@@ -38,12 +38,14 @@ function Call(props) {
             <td width="16%">{call.time}</td>
             <td width="16%">{call.minutes}</td>
             <td width="16%">
-                <ButtonGroup>
-                    <Button className={classes.button_com} onClick={() =>
-                        navigate("/calls/" + call.id)}>Изменить</Button>
-                    <Button id={call.id} className={classes.button_delete}
-                            onClick={handleRemoveClick}>Удалить</Button>
-                </ButtonGroup>
+                {props.is_admin &&
+                    <ButtonGroup>
+                        <Button className={classes.button_com} onClick={() =>
+                            navigate("/calls/" + call.id)}>Изменить</Button>
+                        <Button id={call.id} className={classes.button_delete}
+                                onClick={handleRemoveClick}>Удалить</Button>
+                    </ButtonGroup>
+                }
             </td>
         </tr>
     });
@@ -98,8 +100,9 @@ function Call(props) {
 }
 
 function mapStateToProps(state) {
-    const {callReducer} = state;
+    const {callReducer, userReducer} = state;
     return {
+        is_admin: userReducer.is_admin,
         calls: callReducer.calls,
         currentPage: callReducer.currentPage,
         pageSize: callReducer.pageSize,

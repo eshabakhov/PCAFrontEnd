@@ -38,12 +38,14 @@ function City(props) {
             <td width="16%">{city.discountPercent}</td>
             <td width="16%">{city.discountCallMinutes}</td>
             <td width="16%">
-                <ButtonGroup>
-                    <Button className={classes.button_com} onClick={() =>
-                        navigate("/cities/" + city.id)}>Изменить</Button>
-                    <Button id={city.id} className={classes.button_delete}
-                            onClick={handleRemoveClick}>Удалить</Button>
-                </ButtonGroup>
+                {props.is_admin &&
+                    <ButtonGroup>
+                        <Button className={classes.button_com} onClick={() =>
+                            navigate("/cities/" + city.id)}>Изменить</Button>
+                        <Button id={city.id} className={classes.button_delete}
+                                onClick={handleRemoveClick}>Удалить</Button>
+                    </ButtonGroup>
+                }
             </td>
         </tr>
     });
@@ -98,8 +100,9 @@ function City(props) {
 }
 
 function mapStateToProps(state) {
-    const {cityReducer} = state;
+    const {cityReducer,userReducer} = state;
     return {
+        is_admin: userReducer.is_admin,
         cities: cityReducer.cities,
         currentPage: cityReducer.currentPage,
         pageSize: cityReducer.pageSize,
