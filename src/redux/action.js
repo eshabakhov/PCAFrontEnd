@@ -73,11 +73,15 @@ export function loadAbonents(page = 1) {
     return async dispatch => {
         let url = `/api/abonents/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
-        const jsonData = await response.json();
-        dispatch({
-            type: 'LOAD_ABONENTS',
-            data: jsonData,
-        })
+        if (response.status === 401) {
+            window.location.href = "/login"
+        } else if (response.status !== 403) {
+            const jsonData = await response.json();
+            dispatch({
+                type: 'LOAD_ABONENTS',
+                data: jsonData,
+            })
+        }
     }
 }
 
@@ -139,11 +143,15 @@ export function loadCalls(page = 1) {
     return async dispatch => {
         let url = `/api/calls/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
-        const jsonData = await response.json();
-        dispatch({
-            type: 'LOAD_CALLS',
-            data: jsonData,
-        })
+        if (response.status === 401) {
+            window.location.href = "/login"
+        } else if (response.status !== 403) {
+            const jsonData = await response.json();
+            dispatch({
+                type: 'LOAD_CALLS',
+                data: jsonData,
+            })
+        }
     }
 }
 
@@ -203,11 +211,15 @@ export function loadCities(page = 1) {
     return async dispatch => {
         let url = `/api/cities/list?page=${page}&pageSize=${pageSize}`
         const response = await fetch(url);
-        const jsonData = await response.json();
-        dispatch({
-            type: 'LOAD_CITIES',
-            data: jsonData,
-        })
+        if (response.status === 401) {
+            window.location.href = "/login"
+        } else if (response.status !== 403) {
+            const jsonData = await response.json();
+            dispatch({
+                type: 'LOAD_CITIES',
+                data: jsonData,
+            })
+        }
     }
 }
 

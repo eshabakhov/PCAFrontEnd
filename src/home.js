@@ -23,9 +23,9 @@ function Home(props) {
     })
 
     const tabs = [
-        {title: 'Переговоры', component: <Call/>},
         {title: 'Абоненты', component: <Abonent/>},
-        {title: 'Города', component: <City/>}
+        {title: 'Города', component: <City/>},
+        {title: 'Переговоры', component: <Call/>},
     ];
     if(props.is_admin) {
         tabs.push({title: 'Пользователи', component: <User/>});
