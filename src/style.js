@@ -76,7 +76,6 @@ const useStyles = createUseStyles({
         fontSize: 20,
         boxSizing: 'border-box',
         margin: 8,
-        width: '20%'
     },
 
     control: {
