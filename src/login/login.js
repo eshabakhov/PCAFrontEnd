@@ -5,7 +5,7 @@ import {connect, useDispatch} from 'react-redux';
 import useStyles from "../style";
 import {change} from '../handles'
 import {context} from "../redux/action";
-// import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 function Login(props) {
@@ -15,7 +15,7 @@ function Login(props) {
         password: '',
     };
 
-    // let history = useHistory();
+    const navigate = useNavigate();
 
     const [login, setLogin] = useState(emptyLogin);
 
@@ -40,7 +40,7 @@ function Login(props) {
         }).then(async response => {
             if (response.status === 200) {
                 dispatch(context());
-                window.location.href="/";
+                navigate("/");
             } else {
                 alert("Не удалось войти");
             }

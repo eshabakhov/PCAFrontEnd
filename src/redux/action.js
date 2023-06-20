@@ -315,7 +315,6 @@ export function context() {
             method: 'GET'
         });
         const jsonData = await response.json();
-        console.log(jsonData);
         dispatch({
             type: 'LOAD_CONTEXT',
             is_admin: jsonData.isAdmin
