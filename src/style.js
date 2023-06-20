@@ -52,8 +52,16 @@ const useStyles = createUseStyles({
         backgroundColor: "#4e4f9b"
     },
 
+    button_exit: {
+        ...button,
+        fontSize: 25,
+        backgroundColor: "#4e4f9b",
+        marginLeft: 'auto',
+    },
+
     button_cancel: {
         ...button,
+        fontSize: 40,
         backgroundColor: "#8e8e8e",
         "&:hover": {
             backgroundColor: "#c9c9c9"
@@ -83,6 +91,18 @@ const useStyles = createUseStyles({
         display: 'block',
         width: '20%',
         minWidth: 120
+    },
+
+    titleLabel: {
+        top: 10,
+        fontSize: 30,
+        fontWeight: 400,
+        alignSelf: 'flex-start',
+    },
+
+    header_row: {
+        display: 'flex',
+        alignContent: 'space-between',
     },
 
     inputLabel: {
@@ -125,6 +145,11 @@ const useStyles = createUseStyles({
     cont: {
         margin: 15,
         textAlign: 'left',
+    },
+
+    table_header: {
+        margin: 15,
+        textAlign: 'center',
     },
 
     bottomborder: {

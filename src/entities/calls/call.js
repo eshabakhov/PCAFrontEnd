@@ -32,24 +32,14 @@ function Call(props) {
 
     console.log(props);
     const callList = props.calls.map(call => {
-        return <tr className={classes.t_row} key={call.id}>
-            <td width="5%">{call.id}</td>
-            <td width="16%">{call.abonentName}</td>
-            <td width="16%">{call.cityName}</td>
-            <td width="16%">{call.date}</td>
-            <td width="16%">{call.time}</td>
-            <td width="16%">{call.minutes}</td>
-            <td width="16%">{call.price}</td>
-            <td width="16%">
-                {cookies.get('isAdmin') &&
-                    <ButtonGroup>
-                        <Button className={classes.button_com} onClick={() =>
-                            navigate("/calls/" + call.id)}>Изменить</Button>
-                        <Button id={call.id} className={classes.button_delete}
-                                onClick={handleRemoveClick}>Удалить</Button>
-                    </ButtonGroup>
-                }
-            </td>
+        return <tr onClick={()=>navigate("/calls/"+call.id)} className={classes.t_row} key={call.id}>
+            <td width="7%">{call.id}</td>
+            <td width="13%">{call.abonentName}</td>
+            <td width="13%">{call.cityName}</td>
+            <td width="13%">{call.date}</td>
+            <td width="13%">{call.time}</td>
+            <td width="13%">{call.minutes}</td>
+            <td width="13%">{call.price}</td>
         </tr>
     });
     return (
@@ -58,14 +48,13 @@ function Call(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="calId" width="5%">ID</th>
-                        <th id="abonentName" width="16%">Имя абонента</th>
-                        <th id="cityName" width="16%">Название города</th>
-                        <th id="date" width="16%">Дата</th>
-                        <th id="time" width="16%">Время</th>
-                        <th id="minutes" width="16%">Минут</th>
-                        <th id="minutes" width="16%">Стоимость</th>
-                        <th name="operations" width="16%"></th>
+                        <th id="calId" width="7%">ID</th>
+                        <th id="abonentName" width="13%">Имя абонента</th>
+                        <th id="cityName" width="13%">Название города</th>
+                        <th id="date" width="13%">Дата</th>
+                        <th id="time" width="13%">Время</th>
+                        <th id="minutes" width="13%">Минут</th>
+                        <th id="minutes" width="13%">Стоимость</th>
                     </tr>
                     </thead>
                 </Table>

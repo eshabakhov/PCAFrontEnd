@@ -29,6 +29,9 @@ function CityAdd(props) {
     console.log(city)
     const title = <h2>{'Добавить город'}</h2>;
     return <div className={classes.modal}>
+        <FormGroup>
+            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+        </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
@@ -66,7 +69,6 @@ function CityAdd(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_cancel} tag={Link} to="/">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>

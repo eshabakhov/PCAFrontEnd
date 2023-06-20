@@ -32,23 +32,13 @@ function City(props) {
 
     console.log(props);
     const cityList = props.cities.map(city => {
-        return <tr className={classes.t_row} key={city.id}>
-            <td width="5%">{city.id}</td>
-            <td width="16%">{city.name}</td>
-            <td width="16%">{city.nightRate}</td>
-            <td width="16%">{city.dayRate}</td>
-            <td width="16%">{city.discountPercent}</td>
-            <td width="16%">{city.discountCallMinutes}</td>
-            <td width="16%">
-                {cookies.get('isAdmin') &&
-                    <ButtonGroup>
-                        <Button className={classes.button_com} onClick={() =>
-                            navigate("/cities/" + city.id)}>Изменить</Button>
-                        <Button id={city.id} className={classes.button_delete}
-                                onClick={handleRemoveClick}>Удалить</Button>
-                    </ButtonGroup>
-                }
-            </td>
+        return <tr onClick={()=>navigate("/cities/"+city.id)} className={classes.t_row} key={city.id}>
+            <td width="10%">{city.id}</td>
+            <td width="15%">{city.name}</td>
+            <td width="15%">{city.nightRate}</td>
+            <td width="15%">{city.dayRate}</td>
+            <td width="15%">{city.discountPercent}</td>
+            <td width="15%">{city.discountCallMinutes}</td>
         </tr>
     });
     return (
@@ -57,13 +47,12 @@ function City(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="id" width="5%">ID</th>
-                        <th id="name" width="16%">Название города</th>
-                        <th id="nightRate" width="16%">Тариф ночной</th>
-                        <th id="dayRate" width="16%">Тариф дневной</th>
-                        <th id="discountPercent" width="16%">Размер скидки</th>
-                        <th id="discountCallMinutes" width="16%">Порог скидки</th>
-                        <th name="operations" width="16%"></th>
+                        <th id="id" width="10%">ID</th>
+                        <th id="name" width="15%">Название города</th>
+                        <th id="nightRate" width="15%">Тариф ночной</th>
+                        <th id="dayRate" width="15%">Тариф дневной</th>
+                        <th id="discountPercent" width="15%">Размер скидки</th>
+                        <th id="discountCallMinutes" width="15%">Порог скидки</th>
                     </tr>
                     </thead>
                 </Table>

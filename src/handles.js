@@ -11,7 +11,7 @@ export const change = (event, setFunction, entity) => {
 }
 
 export const getEntity = (entity, id, setFunction) => {
-    return fetch(`${id}`)
+    return fetch(`/api/${entity}/${id}`)
         .then(async response => {
             let jsonData = await response.json()
             setFunction(jsonData)

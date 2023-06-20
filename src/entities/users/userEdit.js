@@ -48,6 +48,9 @@ function UserEdit(props) {
     console.log(user)
     const title = <h2>{'Редактировать пользователя'}</h2>;
     return <div className={classes.modal}>
+        <FormGroup>
+            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+        </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {

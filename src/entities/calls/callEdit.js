@@ -3,9 +3,11 @@ import useStyles from "../../style";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
-import {editCall} from "../../redux/action";
+import {deleteCall, deleteCity, editCall, editCity, loadCalls, loadCities} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
 
+let orderDir = "desc";
+let orderBy = "";
 function CallEdit(props) {
     const dispatch = useDispatch();
 
@@ -31,10 +33,17 @@ function CallEdit(props) {
     const handleChange = event => {
         change(event, setCall, call)
     }
+    const handleRemoveClick = event => {
+        props.deleteCall(Number(event.target.id))
+        navigate("/calls/")
+    }
 
     console.log(call)
     const title = <h2>{'Редактировать переговор'}</h2>;
     return <div className={classes.modal}>
+        <FormGroup>
+            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+        </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
@@ -70,7 +79,8 @@ function CallEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_cancel} tag={Link} to="/">Отменить</Button>
+                    <Button id={call.id} className={classes.button_delete}
+                            onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>
             </Form>
         </Container>
@@ -84,8 +94,17 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = {
-    editCall
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteCall: (id) => {
+            dispatch(deleteCall(id))
+            dispatch(loadCalls(1, orderBy, orderDir))
+        },
+        editCall: (id)=> {
+            dispatch(editCall(id))
+            dispatch(loadCalls(1, orderBy, orderDir))
+        },
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CallEdit);

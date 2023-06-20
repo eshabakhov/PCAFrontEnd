@@ -1,8 +1,8 @@
 import User from './entities/users/user';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useStyles from "./style";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Button, Container} from 'reactstrap';
+import {Button, Container, FormGroup, Input, Label} from 'reactstrap';
 import {connect, useDispatch} from "react-redux";
 import Abonent from "./entities/abonents/abonent";
 import Call from "./entities/calls/call";
@@ -10,6 +10,7 @@ import City from "./entities/city/city";
 import Audit from "./entities/audit/audit";
 import {logout} from "./redux/action";
 import {Cookies} from "react-cookie";
+import Pagination from "@mui/material/Pagination";
 
 function Home(props) {
     const navigate = useNavigate();
@@ -40,13 +41,17 @@ function Home(props) {
 
     const TabContent = ({title, component}) => (
         <div>
-            <h3>{title}</h3>
+            <h3 className={classes.table_header}>{title}</h3>
             {component}
         </div>
     );
 
     return <div>
         <Container className={classes.cont}>
+            <div className={classes.header_row}>
+                <Label className={classes.titleLabel} for="title">Болтушка</Label><br/>
+                <Button className={classes.button_exit} onClick={dispatch(logout)}>➥</Button>
+            </div>
             <div className={classes.bottomborder}>
                 {tabs.map((tab, i) => (
                     <Button key={i} id={i} onClick={openTab}
@@ -54,9 +59,6 @@ function Home(props) {
                         {tab.title}
                     </Button>
                 ))}
-            </div>
-            <div align={"right"}>
-                <Button align="right" className={classes.button_com} onClick={dispatch(logout)}>Выход</Button>
             </div>
             {<TabContent {...tabs[activeTab]} />}
         </Container>

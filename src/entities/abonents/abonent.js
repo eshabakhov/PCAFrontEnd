@@ -32,22 +32,12 @@ function Abonent(props) {
 
     console.log(props);
     const abonentList = props.abonents.map(abonent => {
-        return <tr className={classes.t_row} key={abonent.id}>
-            <td width="5%">{abonent.id}</td>
-            <td width="16%">{abonent.phoneNumber}</td>
-            <td width="16%">{abonent.inn}</td>
-            <td width="16%">{abonent.address}</td>
-            <td width="16%">{abonent.name}</td>
-            <td width="16%">
-                {cookies.get('isAdmin') &&
-                    <ButtonGroup>
-                        <Button className={classes.button_com} onClick={() =>
-                            navigate("/abonents/" + abonent.id)}>Изменить</Button>
-                        <Button id={abonent.id} className={classes.button_delete}
-                        onClick={handleRemoveClick}>Удалить</Button>
-                </ButtonGroup>
-                    }
-            </td>
+        return <tr  onClick={()=>navigate("/abonents/"+abonent.id)} className={classes.t_row} key={abonent.id}>
+            <td width="14%">{abonent.id}</td>
+            <td width="24%">{abonent.phoneNumber}</td>
+            <td width="24%">{abonent.inn}</td>
+            <td width="24%">{abonent.address}</td>
+            <td width="24%">{abonent.name}</td>
         </tr>
     });
     return (
@@ -56,12 +46,11 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="id" width="5%">ID</th>
-                        <th id="phoneNumber" width="16%">Номер телефона</th>
-                        <th id="inn" width="16%">ИНН</th>
-                        <th id="address" width="16%">Адрес</th>
-                        <th id="name" width="16%">Имя</th>
-                        <th name="operations" width="16%"></th>
+                        <th id="id" width="14%">ID</th>
+                        <th id="phoneNumber" width="24%">Номер телефона</th>
+                        <th id="inn" width="24%">ИНН</th>
+                        <th id="address" width="24%">Адрес</th>
+                        <th id="name" width="24%">Имя</th>
                     </tr>
                     </thead>
                 </Table>

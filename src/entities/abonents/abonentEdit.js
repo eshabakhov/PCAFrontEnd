@@ -3,10 +3,11 @@ import useStyles from "../../style";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
-import {editAbonent} from "../../redux/action";
+import {deleteAbonent, editAbonent, loadAbonents} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {Checkbox, FormControlLabel} from "@mui/material";
 
+let orderDir = "desc";
+let orderBy = "";
 function AbonentEdit(props) {
     const dispatch = useDispatch();
 
@@ -30,10 +31,17 @@ function AbonentEdit(props) {
     const handleChange = event => {
         change(event, setAbonent, abonent)
     }
+    const handleRemoveClick = event => {
+        props.deleteAbonent(Number(event.target.id))
+        navigate("/abonents/")
+    }
 
     console.log(abonent)
     const title = <h2>{'Редактировать абонента'}</h2>;
     return <div className={classes.modal}>
+        <FormGroup>
+            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+        </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
@@ -62,7 +70,8 @@ function AbonentEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_cancel} tag={Link} to="/">Отменить</Button>
+                    <Button id={abonent.id} className={classes.button_delete}
+                            onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>
             </Form>
         </Container>
@@ -76,8 +85,17 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = {
-    editAbonent
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteAbonent: (id) => {
+            dispatch(deleteAbonent(id))
+            dispatch(loadAbonents(1, orderBy, orderDir))
+        },
+        editAbonent: (id)=> {
+            dispatch(editAbonent(id))
+            dispatch(loadAbonents(1, orderBy, orderDir))
+        },
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AbonentEdit);

@@ -3,9 +3,11 @@ import useStyles from "../../style";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
-import {editCity} from "../../redux/action";
+import {deleteCity, editCity, loadCities} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
 
+let orderDir = "desc";
+let orderBy = "";
 function CityEdit(props) {
     const dispatch = useDispatch();
 
@@ -31,10 +33,17 @@ function CityEdit(props) {
     const handleChange = event => {
         change(event, setCity, city)
     }
+    const handleRemoveClick = event => {
+        props.deleteCity(Number(event.target.id))
+        navigate("/cities/")
+    }
 
     console.log(city)
     const title = <h2>{'Редактировать города'}</h2>;
     return <div className={classes.modal}>
+        <FormGroup>
+            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+        </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
@@ -72,7 +81,8 @@ function CityEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_cancel} tag={Link} to="/">Отменить</Button>
+                    <Button id={city.id} className={classes.button_delete}
+                            onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>
             </Form>
         </Container>
@@ -86,8 +96,17 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = {
-    editCity
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteCity: (id) => {
+            dispatch(deleteCity(id))
+            dispatch(loadCities(1, orderBy, orderDir))
+        },
+        editCity: (id)=> {
+            dispatch(editCity(id))
+            dispatch(loadCities(1, orderBy, orderDir))
+        },
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityEdit);
