@@ -52,9 +52,17 @@ const useStyles = createUseStyles({
         backgroundColor: "#4e4f9b"
     },
 
+    button_cancel: {
+        ...button,
+        backgroundColor: "#8e8e8e",
+        "&:hover": {
+            backgroundColor: "#c9c9c9"
+        }
+    },
+
     button_delete: {
         ...button,
-        backgroundColor: "#4d7499"
+        backgroundColor: "#ad0606"
     },
 
     label: {
@@ -68,7 +76,6 @@ const useStyles = createUseStyles({
         fontSize: 20,
         boxSizing: 'border-box',
         margin: 8,
-        width: '20%'
     },
 
     control: {

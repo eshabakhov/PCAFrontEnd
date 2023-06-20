@@ -62,7 +62,7 @@ function AbonentEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_delete} tag={Link} to="/">Отменить</Button>
+                    <Button className={classes.button_cancel} tag={Link} to="/">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>
