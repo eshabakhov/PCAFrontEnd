@@ -32,7 +32,7 @@ function Call(props) {
 
     console.log(props);
     const callList = props.calls.map(call => {
-        return <tr onClick={()=>navigate("/calls/"+call.id)} className={classes.t_row} key={call.id}>
+        return <tr onClick={()=> { if(cookies.get('isAdmin') === 'true') navigate("/calls/"+call.id)}} className={classes.t_row} key={call.id}>
             <td width="7%">{call.id}</td>
             <td width="13%">{call.abonentName}</td>
             <td width="13%">{call.cityName}</td>
@@ -70,11 +70,13 @@ function Call(props) {
                 <Table className={classes.table}>
                     <tbody>
                     <tr>
-                        <td width="12%">
+                        {cookies.get('isAdmin') === 'true' &&
+                                                <td width="12%">
                             <Button align="left" className={classes.button_com} onClick={() => navigate("/calls/new")}>
                                 Добавить переговор
                             </Button>
                         </td>
+                        }
                         <td width="70%"/>
                         <td width="18%">
                             <Pagination align="right" className={classes.mt}

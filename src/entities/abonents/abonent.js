@@ -32,7 +32,7 @@ function Abonent(props) {
 
     console.log(props);
     const abonentList = props.abonents.map(abonent => {
-        return <tr  onClick={()=>navigate("/abonents/"+abonent.id)} className={classes.t_row} key={abonent.id}>
+        return <tr  onClick={()=> { if(cookies.get('isAdmin') === 'true') navigate("/abonents/"+abonent.id) }} className={classes.t_row} key={abonent.id}>
             <td width="14%">{abonent.id}</td>
             <td width="24%">{abonent.phoneNumber}</td>
             <td width="24%">{abonent.inn}</td>
@@ -66,12 +66,14 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <tbody>
                     <tr>
-                        <td width="12%">
-                            <Button align="left" className={classes.button_com}
-                                    onClick={() => navigate("/abonents/new")}>
-                                Добавить абонента
-                            </Button>
-                        </td>
+                        {cookies.get('isAdmin') === 'true' &&
+                            <td width="12%">
+                                <Button align="left" className={classes.button_com}
+                                        onClick={() => navigate("/abonents/new")}>
+                                    Добавить абонента
+                                </Button>
+                            </td>
+                        }
                         <td width="70%"/>
                         <td width="18%">
                             <Pagination align="right" className={classes.mt}

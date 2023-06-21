@@ -32,7 +32,7 @@ function City(props) {
 
     console.log(props);
     const cityList = props.cities.map(city => {
-        return <tr onClick={()=>navigate("/cities/"+city.id)} className={classes.t_row} key={city.id}>
+        return <tr onClick={() => { if(cookies.get('isAdmin') === 'true') navigate("/cities/"+city.id)}} className={classes.t_row} key={city.id}>
             <td width="10%">{city.id}</td>
             <td width="15%">{city.name}</td>
             <td width="15%">{city.nightRate}</td>
@@ -68,11 +68,14 @@ function City(props) {
                 <Table className={classes.table}>
                     <tbody>
                     <tr>
-                        <td width="12%">
-                            <Button align="left" className={classes.button_com} onClick={() => navigate("/cities/new")}>
-                                Добавить город
-                            </Button>
-                        </td>
+                        {cookies.get('isAdmin') === 'true' &&
+                            <td width="12%">
+                                <Button align="left" className={classes.button_com}
+                                        onClick={() => navigate("/cities/new")}>
+                                    Добавить город
+                                </Button>
+                            </td>
+                        }
                         <td width="70%"/>
                         <td width="18%">
                             <Pagination align="right" className={classes.mt}
