@@ -29,7 +29,8 @@ function Home(props) {
         {title: 'Города', component: <City/>},
         {title: 'Переговоры', component: <Call/>},
     ];
-    if (cookies.get('isAdmin')) {
+
+    if (cookies.get('isAdmin') === 'true') {
         tabs.push({title: 'Пользователи', component: <User/>});
         tabs.push({title: 'Аудит', component: <Audit/>});
 

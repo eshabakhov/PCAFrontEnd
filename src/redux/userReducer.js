@@ -1,3 +1,5 @@
+import {Cookies} from "react-cookie";
+
 let initialState = {
     users: [],
     currentPage: 0,
@@ -5,6 +7,8 @@ let initialState = {
     total: 0,
     is_admin: false
 }
+
+const cookies = new Cookies();
 
 export const userReducer = (state = initialState, action) => {
     console.log(action);
@@ -73,7 +77,6 @@ export const userReducer = (state = initialState, action) => {
                 users: deleteUser
             }
         case 'LOAD_CONTEXT':
-            console.log(action);
             return {
                 ...state,
                 is_admin: action.is_admin

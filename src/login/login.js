@@ -9,6 +9,8 @@ import {Typography} from '@mui/material';
 import Box from "@mui/material/Box";
 import {Cookies} from "react-cookie";
 
+const cookies = new Cookies();
+
 
 function Login(props) {
 
@@ -42,8 +44,6 @@ function Login(props) {
         }).then(async response => {
             if (response.status === 200) {
                 dispatch(context());
-                const cookies = new Cookies();
-                cookies.set('isAdmin', props.is_admin, { path: '/' });
                 navigate("/");
             } else {
                 alert("Не удалось войти");

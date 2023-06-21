@@ -1,4 +1,8 @@
+import {Cookies} from "react-cookie";
+
 let pageSize = 10
+
+const cookies = new Cookies();
 
 export function loadUsers(page = 1) {
     return async dispatch => {
@@ -293,16 +297,20 @@ export function context() {
             method: 'GET'
         });
         const jsonData = await response.json();
-        dispatch({
-            type: 'LOAD_CONTEXT',
-            is_admin: jsonData.isAdmin
-        })
+        cookies.set('isAdmin', jsonData.isAdmin, { path: '/' });
+
+        // dispatch({
+        //     type: 'LOAD_CONTEXT',
+        //     is_admin: jsonData.isAdmin
+        // })
     }
 }
 
 export function logout() {
     return async dispatch => {
         fetch('/api/logout').then(res => {
+            const cookies = new Cookies();
+            cookies.remove('iAdmin');
             window.location.href = "/login";
             dispatch({
                 type: 'LOGOUT'
