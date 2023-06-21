@@ -75,12 +75,12 @@ function UserAdd(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="passwordHash">Пароль</Label><br/>
-                    <Input className={classes.input} type="text" name="passwordHash" id="passwordHash" value={user.passwordHash || ''}
+                    <Input className={classes.input} type="password" name="passwordHash" id="passwordHash" value={user.passwordHash || ''}
                            onChange={handleChange} autoComplete="passwordHash" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="passwordCheck">Подтверждение пароля</Label><br/>
-                    <Input className={classes.input} type="text" name="passwordCheck" id="passwordCheck" value={user.passwordCheck || ''}
+                    <Input className={classes.input} type="password" name="passwordCheck" id="passwordCheck" value={user.passwordCheck || ''}
                            onChange={handleChange} autoComplete="passwordCheck" required/>
                 </FormGroup>
                 <FormGroup>

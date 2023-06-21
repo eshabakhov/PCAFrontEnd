@@ -19,6 +19,7 @@ function UserEdit(props) {
     const emptyUser = {
         login: '',
         passwordHash: '',
+        passwordCheck:'',
         name: '',
         surname: '',
         patronymic: '',
@@ -54,8 +55,12 @@ function UserEdit(props) {
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
-                submit(event, props.editUser, user);
-                navigate("/")
+                if (user.passwordHash !== user.passwordCheck) {
+                    alert("Пароли не совпадают");
+                } else {
+                    submit(event, props.editUser, user);
+                    navigate("/")
+                }
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="login">Логин</Label><br/>
@@ -79,13 +84,13 @@ function UserEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="passwordHash">Пароль</Label><br/>
-                    <Input className={classes.input} type="text" name="passwordHash" id="passwordHash" value={user.passwordHash || ''}
+                    <Input className={classes.input} type="password" name="passwordHash" id="passwordHash" value={user.passwordHash || ''}
                            onChange={handleChange} autoComplete="passwordHash" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="checkPassword">Подтверждение пароля</Label><br/>
-                    <Input className={classes.input} type="text" name="checkPassword" id="checkPassword" value={user.passwordHash || ''}
-                           onChange={handleChange} autoComplete="checkPassword" required/>
+                    <Label className={classes.label} for="passwordCheck">Подтверждение пароля</Label><br/>
+                    <Input className={classes.input} type="password" name="passwordCheck" id="passwordCheck" value={user.passwordCheck || ''}
+                           onChange={handleChange} autoComplete="passwordCheck" required/>
                 </FormGroup>
                 <FormGroup>
                     <FormControlLabel
@@ -99,7 +104,6 @@ function UserEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_cancel} tag={Link} to="/users/">Отменить</Button>
                     <Button id={user.id} className={classes.button_delete}
                             onClick={handleRemoveClick}>Удалить</Button>
                 </FormGroup>

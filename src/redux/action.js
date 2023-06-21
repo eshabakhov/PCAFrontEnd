@@ -42,7 +42,7 @@ export function addUser(user) {
 export function editUser(user) {
     console.log(user)
     return async dispatch => {
-        const response = await fetch(`/users`, {
+        const response = await fetch(`/api/users`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
