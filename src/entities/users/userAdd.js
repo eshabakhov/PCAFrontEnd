@@ -41,7 +41,7 @@ function UserAdd(props) {
     const title = <h2>{'Добавить пользователя'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
-            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+            <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 3}>←</Button>
         </FormGroup>
         <Container align="center">
             {title}
@@ -50,7 +50,7 @@ function UserAdd(props) {
                     alert("Пароли не совпадают");
                 } else {
                     submit(event, props.addUser, user);
-                    navigate("/users/")
+                    navigate("/?tab=" + 3)
                 }
             }}>
                 <FormGroup>

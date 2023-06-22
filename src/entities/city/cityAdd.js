@@ -30,13 +30,13 @@ function CityAdd(props) {
     const title = <h2>{'Добавить город'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
-            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+            <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 1}>←</Button>
         </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addCity, city);
-                navigate("/?tab=" + 0)
+                navigate("/?tab=" + 1)
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="name">Название города</Label><br/>

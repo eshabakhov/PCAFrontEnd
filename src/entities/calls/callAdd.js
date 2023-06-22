@@ -31,13 +31,13 @@ function CallAdd(props) {
     const title = <h2>{'Добавить город'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
-            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+            <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 2}>←</Button>
         </FormGroup>
         <Container align="center">
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addCall, call);
-                navigate("/?tab=" + 0)
+                navigate("/?tab=" + 2)
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="login">Имя абонента</Label><br/>

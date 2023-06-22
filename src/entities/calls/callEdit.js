@@ -35,14 +35,14 @@ function CallEdit(props) {
     }
     const handleRemoveClick = event => {
         props.deleteCall(Number(event.target.id))
-        navigate("/calls/")
+        navigate("/?tab=" + 2)
     }
 
     console.log(call)
     const title = <h2>{'Редактировать переговор'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
-            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+            <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 2}>←</Button>
         </FormGroup>
         <Container align="center">
             {title}

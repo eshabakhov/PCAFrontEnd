@@ -50,7 +50,7 @@ function UserEdit(props) {
     const title = <h2>{'Редактировать пользователя'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
-            <Button className={classes.button_cancel} tag={Link} to="/">←</Button>
+            <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 3}>←</Button>
         </FormGroup>
         <Container align="center">
             {title}
@@ -59,7 +59,7 @@ function UserEdit(props) {
                     alert("Пароли не совпадают");
                 } else {
                     submit(event, props.editUser, user);
-                    navigate("/")
+                    navigate("/?tab=" + 3)
                 }
             }}>
                 <FormGroup>
