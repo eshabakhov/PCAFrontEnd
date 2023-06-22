@@ -51,7 +51,7 @@ function Home(props) {
         <Container className={classes.cont}>
             <div className={classes.header_row}>
                 <Label className={classes.titleLabel} for="title">Болтушка</Label><br/>
-                <Button className={classes.button_exit} onClick={dispatch(logout)}>➥</Button>
+                <Button className={classes.button_exit} onClick={() => {dispatch(logout);navigate('/login')}}>➥</Button>
             </div>
             <div className={classes.bottomborder}>
                 {tabs.map((tab, i) => (

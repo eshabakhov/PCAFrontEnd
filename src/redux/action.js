@@ -311,7 +311,6 @@ export function logout() {
         fetch('/api/logout').then(res => {
             const cookies = new Cookies();
             cookies.remove('iAdmin');
-            window.location.href = "/login";
             dispatch({
                 type: 'LOGOUT'
             })
