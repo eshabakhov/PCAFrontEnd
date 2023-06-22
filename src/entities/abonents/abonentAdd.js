@@ -34,9 +34,11 @@ function AbonentAdd(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={(event) => {
-                submit(event, props.addAbonent, abonent);
-                navigate("/?tab=" + 0)
+            <Form onSubmit={async (event) => {
+                let data = await submit(event, props.addAbonent, abonent);
+                if (data.abonent !== false) {
+                    navigate("/?tab=" + 0)
+                }
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>

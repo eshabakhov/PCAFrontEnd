@@ -46,9 +46,11 @@ function CallEdit(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={(event) => {
-                submit(event, props.editCall, call);
-                navigate("/")
+            <Form onSubmit={async (event) => {
+                let data = await submit(event, props.editCall, call);
+                if (data.call !== false) {
+                    navigate("/?tab=" + 2)
+                }
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="login">Имя абонента</Label><br/>

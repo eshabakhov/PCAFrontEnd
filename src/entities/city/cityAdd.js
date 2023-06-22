@@ -34,9 +34,11 @@ function CityAdd(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={(event) => {
-                submit(event, props.addCity, city);
-                navigate("/?tab=" + 1)
+            <Form onSubmit={async (event) => {
+                let data = await submit(event, props.addCity, city);
+                if (data.city !== false) {
+                    navigate("/?tab=" + 1);
+                }
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="name">Название города</Label><br/>
