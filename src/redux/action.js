@@ -29,7 +29,14 @@ export function addUser(user) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user)
-        }).then(async response => response.json())
+        }).then(async response => {
+                if (response.status === 400) {
+                    alert(await response.text());
+                    return;
+                }
+                const jsonData = response.json();
+            }
+        )
             .then(user =>
                 dispatch({
                     type: 'ADD_USER',
@@ -50,6 +57,10 @@ export function editUser(user) {
             },
             body: JSON.stringify(user)
         })
+        if (response.status === 400) {
+            alert(await response.text());
+            return;
+        }
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_USER',
@@ -98,7 +109,14 @@ export function addAbonent(abonent) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(abonent)
-        }).then(async response => response.json())
+        }).then(async response => {
+                if (response.status === 400) {
+                    alert(await response.text());
+                    return;
+                }
+                const jsonData = response.json();
+            }
+        )
             .then(abonent =>
                 dispatch({
                     type: 'ADD_ABONENT',
@@ -120,7 +138,11 @@ export function editAbonent(abonent) {
             },
             body: JSON.stringify(abonent)
         })
-        const jsonData = await response.json();
+        if (response.status === 400) {
+            alert(await response.text());
+            return;
+        }
+        const jsonData = response.json();
         dispatch({
             type: 'EDIT_ABONENT',
             abonent: jsonData
@@ -168,7 +190,14 @@ export function addCall(user) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user)
-        }).then(async response => response.json())
+        }).then(async response => {
+                if (response.status === 400) {
+                    alert(await response.text());
+                    return;
+                }
+                const jsonData = response.json();
+            }
+        )
             .then(user =>
                 dispatch({
                     type: 'ADD_CALL',
@@ -189,6 +218,10 @@ export function editCall(user) {
             },
             body: JSON.stringify(user)
         })
+        if (response.status === 400) {
+            alert(await response.text());
+            return;
+        }
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_CALL',
@@ -236,7 +269,14 @@ export function addCity(city) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(city)
-        }).then(async response => response.json())
+        }).then(async response => {
+                if (response.status === 400) {
+                    alert(await response.text());
+                    return;
+                }
+                const jsonData = response.json();
+            }
+        )
             .then(city =>
                 dispatch({
                     type: 'ADD_CITY',
@@ -257,6 +297,10 @@ export function editCity(city) {
             },
             body: JSON.stringify(city)
         })
+        if (response.status === 400) {
+            alert(await response.text());
+            return;
+        }
         const jsonData = await response.json();
         dispatch({
             type: 'EDIT_CITY',
@@ -297,7 +341,7 @@ export function context() {
             method: 'GET'
         });
         const jsonData = await response.json();
-        cookies.set('isAdmin', jsonData.isAdmin, { path: '/' });
+        cookies.set('isAdmin', jsonData.isAdmin, {path: '/'});
 
         // dispatch({
         //     type: 'LOAD_CONTEXT',
