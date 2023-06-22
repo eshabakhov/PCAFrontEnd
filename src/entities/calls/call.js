@@ -48,7 +48,7 @@ function Call(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="calId" width="7%">ID</th>
+                        <th id="callId" width="7%">№</th>
                         <th id="abonentName" width="13%">Имя абонента</th>
                         <th id="cityName" width="13%">Название города</th>
                         <th id="date" width="13%">Дата</th>

@@ -3,8 +3,9 @@ import useStyles from "../../style";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {change, getEntity, submit} from "../../handles";
 import {connect, useDispatch} from "react-redux";
-import {deleteCall, deleteCity, editCall, editCity, loadCalls, loadCities} from "../../redux/action";
+import {deleteCall, deleteCity, editCall, editCity, loadAbonents, loadCalls, loadCities} from "../../redux/action";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 let orderDir = "desc";
 let orderBy = "";
@@ -17,17 +18,18 @@ function CallEdit(props) {
 
     const emptyCall = {
         id: '',
-        abonentName: '',
-        cityName: '',
-        date: '',
-        time: '',
+        abonentId: '',
+        cityId: '',
+        datetime: '',
         minutes: '',
-        price: ''
+        price: '',
     };
     const [call, setCall] = useState(emptyCall)
     const classes = useStyles();
     // Получаем редактируемую задачу
     useEffect(() => {
+        dispatch(loadAbonents());
+        dispatch(loadCities());
         getEntity('calls', id, setCall);
     }, []);
     const handleChange = event => {
@@ -52,32 +54,43 @@ function CallEdit(props) {
                     navigate("/?tab=" + 2)
                 }
             }}>
+                <FormControl className={classes.control}>
+                    <InputLabel className={classes.inputLabel} for="abonentId">Имя абонента</InputLabel><br/>
+                    <Select className={classes.select} name="abonentId" id="abonentId"
+                            value={call.abonentId || ''} dispayEmpty
+                            onChange={handleChange} required>
+                        {props.abonents.map(c => {
+                                return (
+                                    <MenuItem key={c.id} value={c.id}>
+                                        {c.name}
+                                    </MenuItem>)
+                            }
+                        )};
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.control}>
+                    <InputLabel className={classes.inputLabel} for="cityId">Город</InputLabel><br/>
+                    <Select className={classes.select} name="cityId" id="cityId"
+                            value={call.cityId || ''} dispayEmpty
+                            onChange={handleChange} required>
+                        {props.cities.map(c => {
+                                return (
+                                    <MenuItem key={c.id} value={c.id}>
+                                        {c.name}
+                                    </MenuItem>)
+                            }
+                        )};
+                    </Select>
+                </FormControl>
                 <FormGroup>
-                    <Label className={classes.label} for="login">Имя абонента</Label><br/>
-                    <Input className={classes.input} type="text" name="abonentName" id="abonentName"
-                           value={call.abonentName || ''}
-                           onChange={handleChange} autoComplete="abonentName" required/>
+                    <Label className={classes.label} for="datetime">Дата</Label><br/>
+                    <Input className={classes.input} type="text" name="datetime" id="datetime" value={call.datetime || ''}
+                           onChange={handleChange} autoComplete="datetime" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">Город</Label><br/>
-                    <Input className={classes.input} type="text" name="cityName" id="cityName"
-                           value={call.cityName || ''}
-                           onChange={handleChange} autoComplete="cityName" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Дата</Label><br/>
-                    <Input className={classes.input} type="text" name="date" id="date" value={call.date || ''}
-                           onChange={handleChange} autoComplete="date" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Продолжительность</Label><br/>
+                    <Label className={classes.label} for="minutes">Продолжительность</Label><br/>
                     <Input className={classes.input} type="text" name="minutes" id="minutes" value={call.minutes || ''}
                            onChange={handleChange} autoComplete="minutes" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Время</Label><br/>
-                    <Input className={classes.input} type="text" name="time" id="time" value={call.time || ''}
-                           onChange={handleChange} autoComplete="time" required/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
@@ -90,9 +103,11 @@ function CallEdit(props) {
 }
 
 function mapStateToProps(state) {
-    const {callReducer} = state;
+    const {callReducer, abonentReducer, cityReducer} = state;
     return {
+        abonents: abonentReducer.abonents,
         calls: callReducer.calls,
+        cities: cityReducer.cities,
     }
 }
 

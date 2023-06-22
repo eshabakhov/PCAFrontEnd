@@ -27,7 +27,6 @@ export const callReducer = (state = initialState, action) => {
                     price: res.price
                 }
             })
-
             return {
                 ...state,
                 calls: loadCalls,

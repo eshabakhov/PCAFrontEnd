@@ -3,8 +3,11 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addCall} from "../../redux/action";
+import {addCall, loadAbonents, loadCities} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
+import {abonentReducer} from "../../redux/abonentReducer";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {cityReducer} from "../../redux/cityReducer";
 
 function CallAdd(props) {
     const dispatch = useDispatch();
@@ -12,10 +15,9 @@ function CallAdd(props) {
 
     const emptyCall = {
         id: '',
-        abonentName: '',
-        cityName: '',
-        date: '',
-        time: '',
+        abonentId: '',
+        cityId: '',
+        datetime: '',
         minutes: '',
         price: '',
     };
@@ -23,12 +25,14 @@ function CallAdd(props) {
 
     const classes = useStyles();
     useEffect(() => {
+        dispatch(loadAbonents());
+        dispatch(loadCities());
     }, []);
     const handleChange = event => {
         change(event, setCall, call)
     }
     console.log(call)
-    const title = <h2>{'Добавить город'}</h2>;
+    const title = <h2>{'Добавить переговор'}</h2>;
     return <div className={classes.modal}>
         <FormGroup>
             <Button className={classes.button_cancel} tag={Link} to={"/?tab=" + 2}>←</Button>
@@ -41,32 +45,43 @@ function CallAdd(props) {
                     navigate("/?tab=" + 2)
                 }
             }}>
+                <FormControl className={classes.control}>
+                    <InputLabel className={classes.inputLabel} for="abonentId">Имя абонента</InputLabel><br/>
+                    <Select className={classes.select} name="abonentId" id="abonentId"
+                            value={call.abonentId || ''} dispayEmpty
+                            onChange={handleChange} required>
+                        {props.abonents.map(c => {
+                                return (
+                                    <MenuItem key={c.id} value={c.id}>
+                                        {c.name}
+                                    </MenuItem>)
+                            }
+                        )};
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.control}>
+                    <InputLabel className={classes.inputLabel} for="cityId">Город</InputLabel><br/>
+                    <Select className={classes.select} name="cityId" id="cityId"
+                            value={call.cityId || ''} dispayEmpty
+                            onChange={handleChange} required>
+                        {props.cities.map(c => {
+                                return (
+                                    <MenuItem key={c.id} value={c.id}>
+                                        {c.name}
+                                    </MenuItem>)
+                            }
+                        )};
+                    </Select>
+                </FormControl>
                 <FormGroup>
-                    <Label className={classes.label} for="login">Имя абонента</Label><br/>
-                    <Input className={classes.input} type="text" name="abonentName" id="abonentName"
-                           value={call.abonentName || ''}
-                           onChange={handleChange} autoComplete="abonentName" required/>
+                    <Label className={classes.label} for="datetime">Дата</Label><br/>
+                    <Input className={classes.input} type="text" name="datetime" id="datetime" value={call.datetime || ''}
+                           onChange={handleChange} autoComplete="datetime" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label className={classes.label} for="inn">Город</Label><br/>
-                    <Input className={classes.input} type="text" name="cityName" id="cityName"
-                           value={call.cityName || ''}
-                           onChange={handleChange} autoComplete="cityName" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Дата</Label><br/>
-                    <Input className={classes.input} type="text" name="date" id="date" value={call.date || ''}
-                           onChange={handleChange} autoComplete="date" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Продолжительность</Label><br/>
+                    <Label className={classes.label} for="minutes">Продолжительность</Label><br/>
                     <Input className={classes.input} type="text" name="minutes" id="minutes" value={call.minutes || ''}
                            onChange={handleChange} autoComplete="minutes" required/>
-                </FormGroup>
-                <FormGroup>
-                    <Label className={classes.label} for="surname">Время</Label><br/>
-                    <Input className={classes.input} type="text" name="time" id="time" value={call.time || ''}
-                           onChange={handleChange} autoComplete="time" required/>
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
@@ -77,9 +92,11 @@ function CallAdd(props) {
 }
 
 function mapStateToProps(state) {
-    const {callReducer} = state;
+    const {callReducer, abonentReducer, cityReducer} = state;
     return {
+        abonents: abonentReducer.abonents,
         calls: callReducer.calls,
+        cities: cityReducer.cities,
     }
 }
 
