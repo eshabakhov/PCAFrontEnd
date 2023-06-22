@@ -39,11 +39,9 @@ function CallAdd(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={async (event) => {
-                let data = await submit(event, props.addCall, call);
-                if (data.call !== false) {
-                    navigate("/?tab=" + 2)
-                }
+            <Form onSubmit={(event) => {
+                submit(event, props.addCall, call);
+                navigate("/?tab=" + 2)
             }}>
                 <FormControl className={classes.control}>
                     <InputLabel className={classes.inputLabel} for="abonentId">Имя абонента</InputLabel><br/>

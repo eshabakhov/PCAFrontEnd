@@ -44,11 +44,9 @@ function AbonentEdit(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={async (event) => {
-                let data = await submit(event, props.editAbonent, abonent);
-                if (data.abonent !== false) {
-                    navigate("/?tab=" + 0)
-                }
+            <Form onSubmit={(event) => {
+                submit(event, props.editAbonent, abonent);
+                navigate("/")
             }}>
                 <FormGroup>
                     <Label className={classes.label} for="phoneNumber">Номер телефона</Label><br/>

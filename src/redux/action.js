@@ -22,7 +22,7 @@ export function loadUsers(page = 1) {
 
 export function addUser(user) {
     return async dispatch => {
-        return fetch('/api/users', {
+        fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -32,7 +32,7 @@ export function addUser(user) {
         }).then(async response => {
                 if (response.status === 400) {
                     alert(await response.text());
-                    return false;
+                    return;
                 }
                 const jsonData = response.json();
             }
@@ -59,7 +59,7 @@ export function editUser(user) {
         })
         if (response.status === 400) {
             alert(await response.text());
-            return false;
+            return;
         }
         const jsonData = await response.json();
         dispatch({
@@ -102,7 +102,7 @@ export function loadAbonents(page = 1) {
 
 export function addAbonent(abonent) {
     return async dispatch => {
-        return fetch('/api/abonents', {
+        fetch('/api/abonents', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -112,7 +112,7 @@ export function addAbonent(abonent) {
         }).then(async response => {
                 if (response.status === 400) {
                     alert(await response.text());
-                    return false;
+                    return;
                 }
                 const jsonData = response.json();
             }
@@ -140,7 +140,7 @@ export function editAbonent(abonent) {
         })
         if (response.status === 400) {
             alert(await response.text());
-            return false;
+            return;
         }
         const jsonData = response.json();
         dispatch({
@@ -164,6 +164,7 @@ export function deleteAbonent(id) {
     }
 }
 
+
 export function loadCalls(page = 1) {
     return async dispatch => {
         let url = `/api/calls/list?page=${page}&pageSize=${pageSize}`
@@ -182,7 +183,7 @@ export function loadCalls(page = 1) {
 
 export function addCall(user) {
     return async dispatch => {
-        return fetch('/api/calls', {
+        fetch('/api/calls', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -192,7 +193,7 @@ export function addCall(user) {
         }).then(async response => {
                 if (response.status === 400) {
                     alert(await response.text());
-                    return false;
+                    return;
                 }
                 const jsonData = response.json();
             }
@@ -219,7 +220,7 @@ export function editCall(user) {
         })
         if (response.status === 400) {
             alert(await response.text());
-            return false;
+            return;
         }
         const jsonData = await response.json();
         dispatch({
@@ -261,7 +262,7 @@ export function loadCities(page = 1) {
 
 export function addCity(city) {
     return async dispatch => {
-        return fetch('/api/cities', {
+        fetch('/api/cities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -271,7 +272,7 @@ export function addCity(city) {
         }).then(async response => {
                 if (response.status === 400) {
                     alert(await response.text());
-                    return false;
+                    return;
                 }
                 const jsonData = response.json();
             }
@@ -298,7 +299,7 @@ export function editCity(city) {
         })
         if (response.status === 400) {
             alert(await response.text());
-            return false;
+            return;
         }
         const jsonData = await response.json();
         dispatch({

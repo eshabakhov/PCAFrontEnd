@@ -2,7 +2,7 @@ import store from "./index.js";
 
 export const submit = (event, aFunction, entity) => {
     event.preventDefault();
-    return aFunction(entity);
+    aFunction(entity);
 }
 
 export const change = (event, setFunction, entity) => {

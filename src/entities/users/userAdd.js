@@ -45,14 +45,12 @@ function UserAdd(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={async (event) => {
+            <Form onSubmit={(event) => {
                 if (user.passwordHash !== user.passwordCheck) {
                     alert("Пароли не совпадают");
                 } else {
-                    let data = await submit(event, props.addUser, user);
-                    if (data.user !== false) {
-                        navigate("/?tab=" + 3);
-                    }
+                    submit(event, props.addUser, user);
+                    navigate("/?tab=" + 3)
                 }
             }}>
                 <FormGroup>

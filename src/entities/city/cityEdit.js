@@ -46,11 +46,8 @@ function CityEdit(props) {
         </FormGroup>
         <Container align="center">
             {title}
-            <Form onSubmit={async (event) => {
-                let data = await submit(event, props.editCity, city);
-                if (data.city !== false) {
-                    navigate("/?tab=" + 1);
-                }
+            <Form onSubmit={(event) => {
+                submit(event, props.editCity, city);
                 navigate("/?tab=" + 1)
             }}>
                 <FormGroup>
