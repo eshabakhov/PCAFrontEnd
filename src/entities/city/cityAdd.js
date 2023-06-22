@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addCity} from "../../redux/action";
+import {addCity, loadCities} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
 
 function CityAdd(props) {
@@ -36,6 +36,7 @@ function CityAdd(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addCity, city);
+                dispatch(loadCities())
                 navigate("/?tab=" + 1)
             }}>
                 <FormGroup>

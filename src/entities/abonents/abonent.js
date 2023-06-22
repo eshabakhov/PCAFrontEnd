@@ -46,7 +46,7 @@ function Abonent(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="id" width="14%">ID</th>
+                        <th id="id" width="14%">№</th>
                         <th id="phoneNumber" width="24%">Номер телефона</th>
                         <th id="inn" width="24%">ИНН</th>
                         <th id="address" width="24%">Адрес</th>

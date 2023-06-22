@@ -47,7 +47,7 @@ function City(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="id" width="10%">ID</th>
+                        <th id="id" width="10%">№</th>
                         <th id="name" width="15%">Название города</th>
                         <th id="nightRate" width="15%">Тариф ночной</th>
                         <th id="dayRate" width="15%">Тариф дневной</th>

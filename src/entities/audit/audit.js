@@ -39,7 +39,7 @@ function Audit(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th id="id" width="5%">ID</th>
+                        <th id="id" width="5%">№</th>
                         <th id="username" width="16%">Имя пользователя</th>
                         <th id="endpoint" width="16%">Адрес</th>
                         <th id="method" width="16%">Метод</th>

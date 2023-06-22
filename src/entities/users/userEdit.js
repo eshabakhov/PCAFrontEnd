@@ -38,6 +38,7 @@ function UserEdit(props) {
     }
     const handleRemoveClick = event => {
         props.deleteUser(Number(event.target.id))
+        dispatch(loadUsers())
         navigate("/users/")
     }
     const handleChangeCheckBox = event => {
@@ -59,6 +60,7 @@ function UserEdit(props) {
                     alert("Пароли не совпадают");
                 } else {
                     submit(event, props.editUser, user);
+                    dispatch(loadUsers())
                     navigate("/?tab=" + 3)
                 }
             }}>

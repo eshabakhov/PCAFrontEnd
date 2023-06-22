@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addCall, loadAbonents, loadCities} from "../../redux/action";
+import {addCall, loadAbonents, loadCalls, loadCities} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
 import {abonentReducer} from "../../redux/abonentReducer";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
@@ -41,6 +41,7 @@ function CallAdd(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addCall, call);
+                dispatch(loadCalls())
                 navigate("/?tab=" + 2)
             }}>
                 <FormControl className={classes.control}>

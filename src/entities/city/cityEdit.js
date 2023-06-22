@@ -35,6 +35,7 @@ function CityEdit(props) {
     }
     const handleRemoveClick = event => {
         props.deleteCity(Number(event.target.id))
+        dispatch(loadCities())
         navigate("/cities/")
     }
 
@@ -48,6 +49,7 @@ function CityEdit(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.editCity, city);
+                dispatch(loadCities())
                 navigate("/?tab=" + 1)
             }}>
                 <FormGroup>

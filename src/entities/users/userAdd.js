@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addUser} from "../../redux/action";
+import {addUser, loadUsers} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
 import {Checkbox, FormControlLabel} from "@mui/material";
 
@@ -50,6 +50,7 @@ function UserAdd(props) {
                     alert("Пароли не совпадают");
                 } else {
                     submit(event, props.addUser, user);
+                    dispatch(loadUsers())
                     navigate("/?tab=" + 3)
                 }
             }}>

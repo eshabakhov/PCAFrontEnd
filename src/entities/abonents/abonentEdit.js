@@ -33,6 +33,7 @@ function AbonentEdit(props) {
     }
     const handleRemoveClick = event => {
         props.deleteAbonent(Number(event.target.id))
+        dispatch(loadAbonents())
         navigate("/abonents/")
     }
 
@@ -46,6 +47,7 @@ function AbonentEdit(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.editAbonent, abonent);
+                dispatch(loadAbonents())
                 navigate("/")
             }}>
                 <FormGroup>

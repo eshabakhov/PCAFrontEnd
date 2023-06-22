@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../style";
 import {change, submit} from "../../handles";
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {addAbonent} from "../../redux/action";
+import {addAbonent, loadAbonents} from "../../redux/action";
 import {connect, useDispatch} from "react-redux";
 import {Checkbox, FormControlLabel} from "@mui/material";
 
@@ -36,6 +36,7 @@ function AbonentAdd(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.addAbonent, abonent);
+                dispatch(loadAbonents())
                 navigate("/?tab=" + 0)
             }}>
                 <FormGroup>

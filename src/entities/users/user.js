@@ -27,11 +27,12 @@ function User(props) {
     console.log(props);
     const userList = props.users.map(user => {
         return <tr onClick={()=>navigate("/users/"+user.id)} className={classes.t_row} key={user.id}>
-            <td width="20%">{user.login}</td>
-            <td width="20%">{user.name}</td>
-            <td width="20%">{user.surname}</td>
-            <td width="20%">{user.patronymic}</td>
-            <td width="20%">{user.isAdmin || ""}</td>
+            <td width="10%">{user.id}</td>
+            <td width="18%">{user.login}</td>
+            <td width="18%">{user.name}</td>
+            <td width="18%">{user.surname}</td>
+            <td width="18%">{user.patronymic}</td>
+            <td width="18%">{user.isAdmin || ""}</td>
         </tr>
     });
     return (
@@ -40,11 +41,12 @@ function User(props) {
                 <Table className={classes.table}>
                     <thead className={classes.t_head}>
                     <tr>
-                        <th name="login" width="20%">Логин</th>
-                        <th id="name" width="20%">Имя</th>
-                        <th id="surname" width="20%">Фамилия</th>
-                        <th id="patronymic" width="20%">Отчество</th>
-                        <th id="isAdmin" width="20%">Роль</th>
+                        <th name="ID" width="10%">№</th>
+                        <th name="login" width="18%">Логин</th>
+                        <th id="name" width="18%">Имя</th>
+                        <th id="surname" width="18%">Фамилия</th>
+                        <th id="patronymic" width="18%">Отчество</th>
+                        <th id="isAdmin" width="18%">Роль</th>
                     </tr>
                     </thead>
                 </Table>

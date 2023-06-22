@@ -37,6 +37,7 @@ function CallEdit(props) {
     }
     const handleRemoveClick = event => {
         props.deleteCall(Number(event.target.id))
+        dispatch(loadCalls())
         navigate("/?tab=" + 2)
     }
 
@@ -50,6 +51,7 @@ function CallEdit(props) {
             {title}
             <Form onSubmit={(event) => {
                 submit(event, props.editCall, call);
+                dispatch(loadCalls())
                 navigate("/")
             }}>
                 <FormControl className={classes.control}>
